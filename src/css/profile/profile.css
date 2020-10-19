@@ -1,0 +1,24 @@
+.profile-left-div{
+    width: 30%;
+    float: left;
+    height: auto;
+}
+
+.profile-center-div{
+    width: 50%;
+    margin: auto;
+    float: inline;
+}
+
+
+.profile-img{
+    
+    width: 180px;
+    height: 171px;
+}
+
+.no-blogs{
+    font-family: monospace;
+    font-size: xx-large;
+    font-weight: 600;
+}

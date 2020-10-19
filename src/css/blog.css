@@ -1,0 +1,11 @@
+.blog-container{
+    width: 50%; 
+    margin: 50px auto;
+}
+
+.blog-head{
+    padding-top: 30px;
+    font-style: oblique;
+    font-family: 'Lucida Sans';
+    font-weight: lighter;
+}
