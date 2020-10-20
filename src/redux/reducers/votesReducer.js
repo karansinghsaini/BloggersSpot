@@ -1,7 +1,6 @@
 var myState = {
     votes: 0,
     isliked: false,
-    allvotes: []
 };
 
 export const votesReducer = (state=myState, action) => {

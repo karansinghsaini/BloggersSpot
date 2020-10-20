@@ -51,19 +51,3 @@ export function removeVote(user_id,blog_id){
         });
     };
 }
-
-export function getAllVotes(){
-    return dispatch => {
-        axios.get('/comments/votes')
-        .then( data => {
-            dispatch(gotAllVotes(data));
-        });
-    };
-}
-
-export function gotAllVotes(data){
-    return{
-        type: 'GOTALLVOTES',
-        payload: data
-    };
-}

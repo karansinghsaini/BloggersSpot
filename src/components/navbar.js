@@ -11,7 +11,6 @@ const Menu = () => {
     return(
         <>
             <Navbar sticky="top" bg="light" variant="light">
-                {isLoggedIn && <Navbar.Brand href="/home">Blogs</Navbar.Brand> }
                 <Nav className="mr-auto">
                 {isLoggedIn && <Nav.Link href="/home">Home</Nav.Link>} 
                 {isLoggedIn && <Nav.Link href="/new-blog">New Blog</Nav.Link>}

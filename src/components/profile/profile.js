@@ -7,10 +7,9 @@ import jwt from 'jsonwebtoken';
 import { Button, Image, Card } from 'react-bootstrap';
 import '../../css/profile/profile.css';
 import defimg from '../../images/default.jpg';
-
+import {addVote,removeVote} from '../../redux/actions/votes';
 import {GetUserProfile} from '../../redux/actions/user';
 import {GetUserBlogs} from '../../redux/actions/blogs';
-import {getAllVotes} from '../../redux/actions/votes';
 
 import { FaHeart } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
@@ -19,6 +18,7 @@ import { FaRegHeart } from "react-icons/fa";
 const Profile = (props) => {
     // declaring the userid
     var userid;
+  
     // getting userdata from token
     const data = jwt.decode(localStorage.jwtToken);
     // for update-profile
@@ -29,7 +29,7 @@ const Profile = (props) => {
     const user_data = useSelector( state => state.UserProfile.curr_user_data);
     // getting all the blogs for the selected user
     const user_blogs = useSelector( state => state.blogReducer.blogs);
-    const votes = useSelector( state => state.votesReducer.allvotes);
+    const votes = useSelector( state => state.blogReducer.votes);
     const dispatch = useDispatch();
     
     useEffect( () => {
@@ -39,20 +39,29 @@ const Profile = (props) => {
         }
         else{
             userid = props.location.state.user_id;
-        }  
+        }
+
         dispatch(GetUserProfile(userid));
         dispatch(GetUserBlogs(userid));
-        dispatch(getAllVotes());
     },[]);
 
+    // adding the like to the backend
+    const handleVote = (blogid,user_id,e) => {
+        dispatch(addVote(data.id,blogid));
+        dispatch(GetUserBlogs(user_id));
+    };
+
+    // unvoting the blog 
+    const handleUnvote = (blogid,user_id,e) => {
+        dispatch(removeVote(data.id,blogid));
+        dispatch(GetUserBlogs(user_id));   
+    };
+    // for blog-detail page
     const handleClick = (id,e) => {
         setBlogId(id)
         setBlogNavigate(true);
-        // dispatch(setBlogID(id));
-        // localStorage.setItem('blogid',id);
-        // window.location.href = '/blog-detail';
     };
-
+    // for user-profile page
     const handleUpdate = () => {
         dispatch(GetUserProfile(userid));
         setNavigate(true);
@@ -73,7 +82,7 @@ const Profile = (props) => {
 
     var blogList = user_blogs.map( (details) => {
         var vote = votes.filter( vote => vote.blog_id === details._id);
-        var isliked = vote.some( vt => (vt.user_id === userid));
+        var isliked = vote.some( vt => (vt.user_id === data.id));
         return(
             <div key={details._id}>
             <Card className="text-center blog-card" bg='info'>
@@ -85,8 +94,8 @@ const Profile = (props) => {
                 </Card.Text>
                 </Card.Body>
                 <Card.Footer >
-                    {isliked && <FaHeart className='blog-detail-icon' />}&nbsp;
-                    {!isliked && <FaRegHeart className='blog-detail-icon' />}&nbsp;
+                    {isliked && <FaHeart className='blog-detail-icon' onClick={ (e) => handleUnvote(details._id,details.user_id,e)}/>}&nbsp;
+                    {!isliked && <FaRegHeart className='blog-detail-icon' onClick={ (e) => handleVote(details._id,details.user_id,e)}/>}&nbsp;
                     <span>{vote.length}</span>
                 </Card.Footer>
             </Card><br />
@@ -99,7 +108,7 @@ const Profile = (props) => {
     return(
         <div>
             <div className='profile-left-div'>
-                <Image className='profile-img' src={defimg} roundedCircle />
+                <Image className='profile-img' src={defimg} roundedCircle /><br/><br/>
                 <h6>{user_data.fullname}</h6>
                 <p>@{user_data.username}</p>                
                 <p>Contact:- {user_data.phone}</p>     
@@ -108,10 +117,6 @@ const Profile = (props) => {
                 <p>{user_data.bio}</p>
                 { (data.id === user_data._id) && <Button variant="secondary" size="sm" onClick={handleUpdate} >Update profile</Button>}
             </div>
-
-            {/* <div className='profile-right-div' >
-               
-            </div> */}
 
             <div className='profile-center-div'>
                 <h4>Blogs</h4>

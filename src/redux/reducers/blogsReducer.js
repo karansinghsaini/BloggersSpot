@@ -1,14 +1,14 @@
 const myState = {
     blogs: [],
     blogDetail: {},
-    blogid: null
+    votes: []
 };
 
 export const blogReducer =  (state = myState, action) => {
     switch (action.type) {
         case 'BLOGS':
             console.log("Loading Blogs ....... ");
-            return Object.assign(myState,{blogs: action.payload}); 
+            return Object.assign(myState,{blogs: action.payload.blogs, votes: action.payload.votes}); 
         
         case 'NEW_BLOG':
             return state;
@@ -18,9 +18,6 @@ export const blogReducer =  (state = myState, action) => {
 
         case 'BLOGDETAIL':
             return Object.assign(myState,{blogDetail: action.payload.data});
-
-        case 'SETBLOGID':
-            return Object.assign(myState,{blogid: action.payload});
 
         case 'BLOGDELETED':
             // console.log('Blog deleted successfully:- ' + action.payload);

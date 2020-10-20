@@ -1,24 +1,42 @@
-.profile-left-div{
-    width: 30%;
-    float: left;
-    height: auto;
-}
-
-.profile-center-div{
-    width: 50%;
-    margin: auto;
-    float: inline;
-}
-
-
-.profile-img{
-    
-    width: 180px;
-    height: 171px;
-}
-
 .no-blogs{
     font-family: monospace;
     font-size: xx-large;
     font-weight: 600;
+}
+
+@media only screen and (min-width: 800px){
+    .profile-left-div{
+        width: 30%;
+        float: left;
+        height: auto;
+    }
+    
+    .profile-center-div{
+        width: 50%;
+        margin: auto;
+        float: inline;
+    }
+    
+    
+    .profile-img{
+        width: 180px;
+        height: 171px;
+    }
+}
+
+@media only screen and (max-width: 800px){
+    .profile-left-div{
+        height: auto;
+    }
+    
+    .profile-center-div{
+        width: 80%;
+        margin: auto;
+    }
+    
+    
+    .profile-img{
+        width: 140px;
+        height: 131px;
+    }
 }
