@@ -1,0 +1,47 @@
+.register-head{
+    padding-top: 20px;
+    font-style: oblique;
+    font-family: cursive;
+    font-weight: lighter;
+    font-variant: small-caps;
+    color: white;
+}
+
+.register-container{
+    width: fit-content; 
+    margin: 30px auto;
+}
+
+.register-div-style{
+    background-image: url('../../images/login.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+}
+
+.register-box{
+    border-style: groove;
+    width: 40%;
+    margin: 10px auto;
+    box-shadow: 10px 15px 8px 0 rgba(0, 0, 0, 0.2), 0 15px 20px 0 rgba(0, 0, 0, 0.19);
+    box-sizing: border-box;  
+}
+
+.register-form-text{
+    color: white;
+    font-weight: 500;
+    font-variant: small-caps;
+}
+
+/* Post_register CSS */
+.post_register-container{
+    width: fit-content; 
+    margin: 50px auto;
+}
+
+.post_register-text{
+    padding-top: 30px;
+    font-style: oblique;
+    font-family: 'Lucida Sans';
+    font-weight: lighter;
+}

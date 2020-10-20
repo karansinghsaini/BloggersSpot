@@ -1,0 +1,33 @@
+.login-div-style{
+    height: 610px;
+    background-image: url('../../images/login.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+}
+
+.login-head{
+    padding-top: 40px;
+    font-style: oblique;
+    font-family: 'Lucida Sans';
+    font-weight: lighter;
+    color: white;
+}
+
+.login-container{
+    width: fit-content; 
+    margin: 20px auto;
+}
+
+.login-box{
+    border-style: groove;
+    width: 40%;
+    margin: 60px auto;
+    box-shadow: 10px 15px 8px 0 rgba(0, 0, 0, 0.2), 0 15px 20px 0 rgba(0, 0, 0, 0.19);
+    box-sizing: border-box;  
+}
+
+.login-form-text{
+    color: white;
+    /* font-weight: 500; */
+}

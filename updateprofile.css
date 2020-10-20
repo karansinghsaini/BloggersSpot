@@ -1,0 +1,11 @@
+.profile-head{
+    padding-top: 30px;
+    font-style: oblique;
+    font-family: 'Lucida Sans';
+    font-weight: lighter;
+}
+
+.profile-container{
+    width: fit-content; 
+    margin: 50px auto;
+}
