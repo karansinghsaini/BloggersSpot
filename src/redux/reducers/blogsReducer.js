@@ -17,7 +17,7 @@ export const blogReducer =  (state = myState, action) => {
             return state;
 
         case 'BLOGDETAIL':
-            return Object.assign(myState,{blogDetail: action.payload.data});
+            return Object.assign(myState,{blogDetail: action.payload.blogs, votes: action.payload.votes});
 
         case 'BLOGDELETED':
             // console.log('Blog deleted successfully:- ' + action.payload);

@@ -68,12 +68,18 @@ route.get('/getBlog/:id', verifyToken, (req, res) => {
         if(err) {
           res.sendStatus(403);
         } else {
-            blogs.findOne({_id: req.params.id}).exec(function(err,data){
+            blogs.findOne({_id: req.params.id}).exec(function(err,blogs_data){
                 if (err) return res.json({
                     success: false,
                     error: err.message
                 });
-                return res.json(data);
+                votes.find({blog_id: req.params.id})
+                .then( votes_data => {
+                    return res.json({
+                        blogs: blogs_data,
+                        votes: votes_data
+                    });
+                });
             });
         }
     });

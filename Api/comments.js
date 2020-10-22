@@ -96,34 +96,7 @@ route.post('/:user_id/vote/:blog_id', (req,res)=>{
       });
 });
 
-route.get('/votes', (req,res) => {
-    votes.find({})
-    .then( data => {
-        res.json(data);
-    });
-});
 
-// finding total votes and vote of the current user for a particular blog
-route.get('/:blog_id/get-votes/:user_id', (req,res) => {
-    votes.find({blog_id: req.params.blog_id})
-    .exec(function(err,totalvotes){
-        votes.find({blog_id: req.params.blog_id,user_id: req.params.user_id})
-        .exec(function(err,vote){
-            if(vote.length === 0){
-                res.json({
-                    votes: totalvotes.length,
-                    user_vote: false
-                });
-            }
-            else{
-                res.json({
-                    votes: totalvotes.length,
-                    user_vote: true
-                });
-            }
-        });
-    });
-});
 
 // remove the vote for the current user for a particular blog
 route.get('/:blog_id/remove-vote/:user_id', (req,res) => {
@@ -143,25 +116,6 @@ route.get('/:blog_id/remove-vote/:user_id', (req,res) => {
             }
         });
     });
-
-    // votes.find({blog_id: blog_id})
-    //     .exec(function(err,totalvotes){
-    //         votes.find({user_id: user_id})
-    //         .exec(function(err,vote){
-    //             if(vote === null){
-    //                 res.json({
-    //                     votes: totalvotes.length,
-    //                     user_vote: false
-    //                 });
-    //             }
-    //             else{
-    //                 res.json({
-    //                     votes: totalvotes.length,
-    //                     user_vote: true
-    //                 });
-    //             }
-    //         });
-    //     });
 });
 
 module.exports = route;
