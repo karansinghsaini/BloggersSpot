@@ -15,6 +15,7 @@
     margin-left: 90%;
 }
 
+<<<<<<< HEAD
 .blogs-list{
     margin: auto;
 }
@@ -26,6 +27,12 @@
 @media only screen and (min-width: 768px){
     .blogs-list{
         width: 70%;
+=======
+
+@media only screen and (min-width: 800px){
+    .blogs-list{
+        width: 50%;
+>>>>>>> 1cf867146a28eb59fb78fddc18815564829231f0
         margin: auto;
     }
     
@@ -35,14 +42,22 @@
     }
 }
 
+<<<<<<< HEAD
 @media only screen and (min-width: 600px) and (max-width: 768px){
     .blogs-list{
         width: 80%;
+=======
+@media only screen and (max-width: 800px){
+    .blogs-list{
+>>>>>>> 1cf867146a28eb59fb78fddc18815564829231f0
         margin: auto;
     }
     
     .blogs-detail{
+<<<<<<< HEAD
         width: 50%;
+=======
+>>>>>>> 1cf867146a28eb59fb78fddc18815564829231f0
         margin: 40px auto;
     }
 }

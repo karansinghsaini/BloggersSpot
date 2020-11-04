@@ -5,6 +5,7 @@
     font-weight: lighter;
 }
 
+<<<<<<< HEAD
 /* for mobile phones */
 .blog-container{ 
     width: 80%;
@@ -12,13 +13,20 @@
 }
 
 @media only screen and (min-width: 768px){
+=======
+@media only screen and (min-width: 800px){
+>>>>>>> 1cf867146a28eb59fb78fddc18815564829231f0
     .blog-container{
         width: 50%; 
         margin: 50px auto;
     }
 }
 
+<<<<<<< HEAD
 @media only screen and (min-width: 600px) and (max-width: 768px){
+=======
+@media only screen and (max-width: 800px){
+>>>>>>> 1cf867146a28eb59fb78fddc18815564829231f0
     .blog-container{ 
         width: 80%;
         margin: 50px auto;
