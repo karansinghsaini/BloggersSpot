@@ -12,6 +12,7 @@ import Logout from './components/login/logout';
 import Profile from './components/profile/profile';
 import Updateprofile from './components/profile/Updateprofile';
 import Menu from './components/navbar';
+import Authors from './components/authors';
 import Blog from './components/blogs/new_blog';
 import Detail from './components/blogs/blog_detail';
 
@@ -42,6 +43,7 @@ render(){
                       <Route path='/profile' render={(props) => <Profile {...props}/>} />
                       <Route path='/update-profile' component={Updateprofile} />
                       <Route path='/new-blog' component={Blog} />
+                      <Route path='/authors' component={Authors} />
                       <Route path='/blog-detail' render={(props) => <Detail {...props}/>} />
                   
                   </Switch>

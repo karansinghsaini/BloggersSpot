@@ -2,16 +2,6 @@
     box-shadow: 10px 15px 8px 0 rgba(0, 0, 0, 0.2), 0 15px 20px 0 rgba(0, 0, 0, 0.19);    
 }
 
-.blogs-list{
-    width: 50%;
-    margin: auto;
-}
-
-.blogs-detail{
-    width: 50%;
-    margin: 40px auto;
-}
-
 .card-title-home {
     cursor: pointer;
 }
@@ -23,4 +13,36 @@
 
 .delete{
     margin-left: 90%;
+}
+
+.blogs-list{
+    margin: auto;
+}
+
+.blogs-detail{
+    margin: 40px auto;
+}
+
+@media only screen and (min-width: 768px){
+    .blogs-list{
+        width: 70%;
+        margin: auto;
+    }
+    
+    .blogs-detail{
+        width: 50%;
+        margin: 40px auto;
+    }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 768px){
+    .blogs-list{
+        width: 80%;
+        margin: auto;
+    }
+    
+    .blogs-detail{
+        width: 50%;
+        margin: 40px auto;
+    }
 }

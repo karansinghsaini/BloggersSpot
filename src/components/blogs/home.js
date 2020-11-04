@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {Card} from 'react-bootstrap';
 import {Redirect} from 'react-router-dom';
 import {getBlogs} from '../../redux/actions/blogs';
-import {getAllVotes, addVote,removeVote} from '../../redux/actions/votes';
+import {addVote,removeVote} from '../../redux/actions/votes';
 
 import { FaHeart } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
@@ -18,43 +18,39 @@ const Home = () => {
     //getting all blogs
     const blogs = useSelector(state => state.blogReducer.blogs);
     // getting all votes
-    const votes = useSelector( state => state.votesReducer.allvotes);
+    var votes = useSelector( state => state.blogReducer.votes);
     // storing boolean value on the bassis on clicks
     const [blogNav,setBlogNav] = useState(false);
     const [profileNav, setProfileNav] = useState(false);
     // storing blog and author id to pass as props in Redirect component
     const [author,setAuthor] = useState();
     const [blogid, setBlogId] = useState();
-    const [domupdate, setDomupdate] = useState(false);
     
     const dispatch = useDispatch();
 
     // adding the like to the backend
     const handleVote = (blogid,e) => {
-        setDomupdate(true);
         dispatch(addVote(data.id,blogid));
+        dispatch(getBlogs());
     };
 
     // unvoting the blog 
     const handleUnvote = (blogid,e) => {
-        setDomupdate(false);
         dispatch(removeVote(data.id,blogid));
+        dispatch(getBlogs());       
     };
 
     useEffect (() => {
-        dispatch(getBlogs());      
-        dispatch(getAllVotes());  
-    }, [domupdate]);
+        dispatch(getBlogs());        
+    }, []);
 
     const handleBlogClick = (id,e) => {
         setBlogId(id);
-        //localStorage.setItem('blogid', id);
         setBlogNav(true);
     };
 
     const handleProfileClick = (id,e) => {
         setAuthor(id)
-        //localStorage.setItem('userid', id);
         setProfileNav(true);
     };
 

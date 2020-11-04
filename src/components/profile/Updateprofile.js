@@ -59,7 +59,7 @@ const Profile = () => {
                             </InputGroup.Prepend>
                             <Form.Control
                             type="text"
-                            value={user_data.username}
+                            value={username}
                             aria-describedby="inputGroupPrepend"
                             onChange = { (e) => setUsername(e.target.value)}
                             required
@@ -71,7 +71,7 @@ const Profile = () => {
                     <Form.Label>Website</Form.Label>
                     <Form.Control
                         type="text"
-                        value={user_data.website}
+                        value={website}
                         onChange = { (e) => setWebsite(e.target.value)}
                     />
                     </Form.Group>
@@ -83,7 +83,7 @@ const Profile = () => {
                         <Form.Label>Phone</Form.Label>
                         <Form.Control 
                         type="number" 
-                        value={user_data.phone} 
+                        value={phone} 
                         onChange = { (e) => setPhone(e.target.value)}
                         />
                     </Form.Group>
@@ -92,7 +92,7 @@ const Profile = () => {
                         <Form.Label>Gender</Form.Label>
                         <Form.Control 
                         type="text" 
-                        value={user_data.gender}
+                        value={gender}
                         required 
                         onChange = { (e) => setGender(e.target.value)}
                         />
@@ -106,7 +106,7 @@ const Profile = () => {
                         </InputGroup.Prepend>
                         <Form.Control 
                         as="textarea" 
-                        value={user_data.bio}
+                        value={bio}
                         aria-label="With textarea" 
                         onChange={ (e) => setBio(e.target.value)} />
                     </InputGroup>

@@ -16,9 +16,25 @@ export function GotUser(data){
 export function GetUserProfile (id) {
     return dispatch => {
         dispatch(GettingUser);
-        return axios.get(`/user/getUser/${id}`)
+        axios.get(`/user/getUser/${id}`)
         .then( (res) => {
             dispatch(GotUser(res));
         });
-    }
+    };
+}
+
+export function GotAllUsers(data){
+    return {
+        type: 'GOTALLUSERS',
+        payload: data
+    };
+}
+
+export function GetAllUsers(){
+    return dispatch => {     
+        axios.get('user/getUsers')
+        .then( (res) => {
+            dispatch(GotAllUsers(res));
+        });
+    };
 }

@@ -15,13 +15,13 @@
 }
 
 .login-container{
-    width: fit-content; 
+    width: 70%; 
     margin: 20px auto;
 }
 
 .login-box{
     border-style: groove;
-    width: 40%;
+    width: 80%;
     margin: 60px auto;
     box-shadow: 10px 15px 8px 0 rgba(0, 0, 0, 0.2), 0 15px 20px 0 rgba(0, 0, 0, 0.19);
     box-sizing: border-box;  
@@ -30,4 +30,34 @@
 .login-form-text{
     color: white;
     /* font-weight: 500; */
+}
+
+@media only screen and (min-width: 768px){
+    .login-container{
+        width: fit-content; 
+        margin: 20px auto;
+    }
+    
+    .login-box{
+        border-style: groove;
+        width: 40%;
+        margin: 60px auto;
+        box-shadow: 10px 15px 8px 0 rgba(0, 0, 0, 0.2), 0 15px 20px 0 rgba(0, 0, 0, 0.19);
+        box-sizing: border-box;  
+    }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 768px){
+    .login-container{
+        width: fit-content; 
+        margin: 20px auto;
+    }
+    
+    .login-box{
+        border-style: groove;
+        width: 60%;
+        margin: 60px auto;
+        box-shadow: 10px 15px 8px 0 rgba(0, 0, 0, 0.2), 0 15px 20px 0 rgba(0, 0, 0, 0.19);
+        box-sizing: border-box;  
+    }
 }

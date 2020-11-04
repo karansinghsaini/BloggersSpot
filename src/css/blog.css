@@ -1,11 +1,26 @@
-.blog-container{
-    width: 50%; 
-    margin: 50px auto;
-}
-
 .blog-head{
     padding-top: 30px;
     font-style: oblique;
     font-family: 'Lucida Sans';
     font-weight: lighter;
+}
+
+/* for mobile phones */
+.blog-container{ 
+    width: 80%;
+    margin: 50px auto;
+}
+
+@media only screen and (min-width: 768px){
+    .blog-container{
+        width: 50%; 
+        margin: 50px auto;
+    }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 768px){
+    .blog-container{ 
+        width: 80%;
+        margin: 50px auto;
+    }
 }

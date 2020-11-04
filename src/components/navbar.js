@@ -11,11 +11,10 @@ const Menu = () => {
     return(
         <>
             <Navbar sticky="top" bg="light" variant="light">
-                {isLoggedIn && <Navbar.Brand href="/home">Blogs</Navbar.Brand> }
                 <Nav className="mr-auto">
                 {isLoggedIn && <Nav.Link href="/home">Home</Nav.Link>} 
                 {isLoggedIn && <Nav.Link href="/new-blog">New Blog</Nav.Link>}
-
+                {isLoggedIn && <Nav.Link href="/authors">Authors</Nav.Link>}
                 {isLoggedIn && <NavDropdown title="Profile" id="collasible-nav-dropdown">
                     <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
                     {/* <NavDropdown.Item href="/settings">Settings</NavDropdown.Item>
