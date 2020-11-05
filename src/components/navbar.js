@@ -2,7 +2,7 @@ import React from 'react';
 import {Navbar, Nav, Button, Form, FormControl, NavDropdown,Image} from 'react-bootstrap';
 import {useSelector} from 'react-redux';
 import jwt from 'jsonwebtoken';
-
+import '../css/navbar.css';
 import Logo from '../images/logo.png';
 
 const Menu = () => {
@@ -13,8 +13,8 @@ const Menu = () => {
     return(
         <>
             <Navbar sticky="top" bg="light" variant="light">
-                <Nav className="mr-auto">
-                    <Nav.Link><Image src={Logo}></Image></Nav.Link>
+                <Nav className="mr-auto nav-font">
+                {isLoggedIn && <Nav.Link><Image src={Logo}></Image></Nav.Link>}
                 {isLoggedIn && <Nav.Link href="/home">Home</Nav.Link>} 
                 {isLoggedIn && <Nav.Link href="/new-blog">New Blog</Nav.Link>}
                 {isLoggedIn && <Nav.Link href="/authors">Find Authors</Nav.Link>}
@@ -27,7 +27,7 @@ const Menu = () => {
                 </NavDropdown>}
                 </Nav>
 
-                <Nav className="mr-auto">
+                <Nav className="mr-auto nav-font">
                 {!isLoggedIn && <Nav.Link href="/login">Login</Nav.Link>}
                 {!isLoggedIn && <Nav.Link href="/register">Register</Nav.Link>}
                 </Nav>

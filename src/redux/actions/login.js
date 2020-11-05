@@ -4,13 +4,13 @@ export function setCurrentUser (data) {
     return {
         type: 'USER_LOGIN', 
         payload: data
-    }
+    };
 }
 
 export function loggedIn () {
     return {
         type: 'LOGGEDIN'
-    }
+    };
 }
 
 export function userLogin(data){

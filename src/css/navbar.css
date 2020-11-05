@@ -1,0 +1,15 @@
+.nav-font{
+    font-size: small;
+}
+
+@media only screen and (min-width: 800px){
+    .nav-font{
+        font-size: large;
+    }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 800px){
+    .nav-font{
+        font-size: 15px;
+    }
+}

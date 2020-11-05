@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-
+import {useSelector} from 'react-redux';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
 
@@ -17,21 +17,19 @@ import Blog from './components/blogs/new_blog';
 import Detail from './components/blogs/blog_detail';
 
 
-class App extends React.Component {
-  // const [check, setCheck] = useState(false);
+const App = () => {
+   const check = useSelector( state => state.userReducer.isLoggedIn );
 
   // useEffect = () => {
   //   setCheck(this.props.reducer_state.check)
   // }
-
-render(){
   return(
       <div className="App">
           <BrowserRouter>
           <Menu />
                   <Switch>
-                      <Route exact path='/' component={Register} /> 
-                      {/* { check && <Route exact path='/' component={Home} /> } */}
+                      { !check && <Route exact path='/' component={Register} /> }
+                      { check && <Route exact path='/' component={Home} /> }
                       <Route exact path='/home' component={Home} />
                       
                       <Route path='/register' component={Register} />
@@ -53,7 +51,7 @@ render(){
       </div>
   );
 }
-}
+
 
 //Accessing the state of the reducer
 
