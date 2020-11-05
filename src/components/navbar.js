@@ -14,8 +14,7 @@ const Menu = () => {
         <>
             <Navbar sticky="top" bg="light" variant="light">
                 <Nav className="mr-auto nav-font">
-                {isLoggedIn && <Nav.Link><Image src={Logo}></Image></Nav.Link>}
-                {isLoggedIn && <Nav.Link href="/home">Home</Nav.Link>} 
+                {isLoggedIn && <Nav.Link href="/home"><Image src={Logo}></Image></Nav.Link>}
                 {isLoggedIn && <Nav.Link href="/new-blog">New Blog</Nav.Link>}
                 {isLoggedIn && <Nav.Link href="/authors">Find Authors</Nav.Link>}
                 {isLoggedIn && <NavDropdown title="Profile" id="collasible-nav-dropdown">
