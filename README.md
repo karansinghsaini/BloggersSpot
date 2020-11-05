@@ -1,3 +1,5 @@
+### This project is not completed yet.
+
 This is a Blogs website made using Reactjs, Nodejs and MongoDB.
 
 ### Reactjs

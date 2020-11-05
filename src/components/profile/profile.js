@@ -116,7 +116,7 @@ const Profile = (props) => {
                 <h4>Bio</h4>
                 <p>{user_data.bio}</p>
                 { (data.id === user_data._id) && <Button variant="secondary" size="sm" onClick={handleUpdate} >Update profile</Button>}
-            </div>
+            </div><br />
 
             <div className='profile-center-div'>
                 <h4>Blogs</h4>

@@ -5,14 +5,20 @@
     font-weight: lighter;
 }
 
-@media only screen and (min-width: 800px){
+/* for mobile phones */
+.blog-container{ 
+    width: 80%;
+    margin: 50px auto;
+}
+
+@media only screen and (min-width: 768px){
     .blog-container{
         width: 50%; 
         margin: 50px auto;
     }
 }
 
-@media only screen and (max-width: 800px){
+@media only screen and (min-width: 600px) and (max-width: 768px){
     .blog-container{ 
         width: 80%;
         margin: 50px auto;

@@ -74,7 +74,7 @@ route.post('/loginUser',async (req,res) => {
 });
 
 route.get('/getUsers', (req, res) => {
-    users.find({}, (err, userdata) => {
+    users.find({}).sort({ username: 1}).exec(function(err, userdata){
         if (err) return res.json({
             success: false,
             error: err.message

@@ -44,6 +44,7 @@ render(){
                       <Route path='/update-profile' component={Updateprofile} />
                       <Route path='/authors' component={Author} />
                       <Route path='/new-blog' component={Blog} />
+                      <Route path='/authors' component={Author} />
                       <Route path='/blog-detail' render={(props) => <Detail {...props}/>} />
                   
                   </Switch>

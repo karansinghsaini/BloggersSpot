@@ -16,7 +16,7 @@ export function GotUser(data){
 export function GetUserProfile (id) {
     return dispatch => {
         dispatch(GettingUser);
-        return axios.get(`/user/getUser/${id}`)
+        axios.get(`/user/getUser/${id}`)
         .then( (res) => {
             dispatch(GotUser(res));
         });

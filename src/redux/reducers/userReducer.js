@@ -22,4 +22,5 @@ export const userReducer =  (state = myState, action) => {
         default:
             return state;
     }   
-}
+};
+
