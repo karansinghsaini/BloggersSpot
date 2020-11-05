@@ -7,24 +7,11 @@
     color: white;
 }
 
-.register-container{
-    width: fit-content; 
-    margin: 30px auto;
-}
-
 .register-div-style{
     background-image: url('../../images/login.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: 100% 100%;
-}
-
-.register-box{
-    border-style: groove;
-    width: 40%;
-    margin: 10px auto;
-    box-shadow: 10px 15px 8px 0 rgba(0, 0, 0, 0.2), 0 15px 20px 0 rgba(0, 0, 0, 0.19);
-    box-sizing: border-box;  
 }
 
 .register-form-text{
@@ -44,4 +31,50 @@
     font-style: oblique;
     font-family: 'Lucida Sans';
     font-weight: lighter;
+}
+/* for mobile */
+.register-container{
+    width: 70%; 
+    margin: 30px auto;
+}
+
+.register-box{
+    border-style: groove;
+    width: 80%;
+    margin: 10px auto;
+    box-shadow: 10px 15px 8px 0 rgba(0, 0, 0, 0.2), 0 15px 20px 0 rgba(0, 0, 0, 0.19);
+    box-sizing: border-box;  
+}
+
+/* for desktop */
+@media only screen and (min-width: 800px){
+    .register-container{
+        width: fit-content; 
+        margin: 30px auto;
+    }
+    
+    .register-box{
+        border-style: groove;
+        width: 50%;
+        margin: 10px auto;
+        box-shadow: 10px 15px 8px 0 rgba(0, 0, 0, 0.2), 0 15px 20px 0 rgba(0, 0, 0, 0.19);
+        box-sizing: border-box;  
+    }
+}
+
+
+/* for tabs */
+@media only screen and (min-width: 600px) and (max-width: 800px){
+    .register-container{
+        width: 70%; 
+        margin: 30px auto;
+    }
+    
+    .register-box{
+        border-style: groove;
+        width: 70%;
+        margin: 10px auto;
+        box-shadow: 10px 15px 8px 0 rgba(0, 0, 0, 0.2), 0 15px 20px 0 rgba(0, 0, 0, 0.19);
+        box-sizing: border-box;  
+    }
 }

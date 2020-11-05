@@ -1,4 +1,5 @@
 const myState = {
+    users: [],
     isLoggedIn: false,
     current_user: {}
 };
@@ -13,7 +14,10 @@ export const userReducer =  (state = myState, action) => {
             return Object.assign(myState,{isLoggedIn: true, current_user: action.payload.user_data});    
 
         case 'LOGGEDIN':
-            return Object.assign(myState,{isLoggedIn: true});    
+            return Object.assign(myState,{isLoggedIn: true});
+            
+        case 'GOTALLUSERS':
+            return Object.assign(myState,{users: action.payload.data});
 
         default:
             return state;
