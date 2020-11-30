@@ -7,19 +7,37 @@ const votes = require('../models/votes');
 var jwt = require('jsonwebtoken');
 // importing our verifyToken function
 const verifyToken = require('./verifyToken');
+require('dotenv').config();
 const route = express.Router();
 // for processing image
 const multer = require('multer');
 // secret key used while creating token.
+const cloudinary = require("cloudinary").v2;
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const secret = '53ddf1277aa9cce7f64fd176d566553322a86c139047a1d9c7a8e09c2500029ba167c9efba48fe49e9c81308f4d3c03c64016ad05478b3785432aea52ab5043a';
 
-// for storing profile image
-const Storage = multer.diskStorage({
-    destination: "./src/media/profile",
-    filename: function (req, file, cb) {
-        cb(null, Date.now()+file.originalname)
-      }
+// cloudinary configuration
+cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.API_KEY,
+    api_secret: process.env.API_SECRET
 });
+// for storing profile image
+const storage = new CloudinaryStorage({
+    cloudinary: cloudinary,
+    params:{
+        folder: "reactBlog",
+        format: async (req, file) => 'png',
+    },
+});
+
+// for storing profile image
+// const Storage = multer.diskStorage({
+//     destination: "./src/media/profile",
+//     filename: function (req, file, cb) {
+//         cb(null, Date.now()+file.originalname)
+//       }
+// });
 
 
 // const fileFilter=(req, file, cb)=>{
@@ -30,15 +48,12 @@ const Storage = multer.diskStorage({
 //     }
 // }
 
-const upload = multer({
-    storage: Storage,
-    limits: {
-        fileSize: 1024 * 1024 * 5
-    }
+const parser = multer({
+    storage: storage
 }).single('image');
 
 route.get('/profile/:id',verifyToken, (req, res) => {
-    jwt.verify(req.token, secret, (err, authData) => {
+    jwt.verify(req.token, process.env.Secret, (err, authData) => {
         if(err) {
           res.sendStatus(403);
         } else {
@@ -53,8 +68,36 @@ route.get('/profile/:id',verifyToken, (req, res) => {
     });
 });
 
+// route.put('/updateprofilephoto/:id', verifyToken, parser, (req, res,next) => {
+//     console.log(req.file);
+//     var update = {
+//         "image": req.file.path
+//     };
 
-route.put('/updateprofile/:id', verifyToken,  upload, (req, res,next) => {
+//     jwt.verify(req.token, secret, (err, authData) => {
+//         if(err) {
+//           res.sendStatus(403);
+//         } 
+//         if(req.params.id === authData.id){
+//             users.findByIdAndUpdate({ _id: req.params.id }, update, err => {
+//                 if (err) return res.json({
+//                     success: false,
+//                     error: err
+//                 });
+//                 return res.json({
+//                     success: true,
+//                     authData
+//                 });
+//             });
+//         }
+//         else{
+//             return res.json("Not Authorised");
+//         }
+//     });
+// });
+
+route.put('/updateprofile/:id', verifyToken,  parser, (req, res,next) => {
+    console.log(req.file);
     var update = {
         "fullname": req.body.fullname,
         "username": req.body.username,
@@ -62,7 +105,7 @@ route.put('/updateprofile/:id', verifyToken,  upload, (req, res,next) => {
         "gender": req.body.gender,
         "phone": req.body.phone,
         "website": req.body.website,
-        "image": `../../media/profile/${req.file.filename}`
+        "image": req.file.path
     };
 
     jwt.verify(req.token, secret, (err, authData) => {

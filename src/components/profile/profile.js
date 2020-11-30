@@ -4,9 +4,9 @@ import {useDispatch, useSelector} from 'react-redux';
 
 import jwt from 'jsonwebtoken';
 
-import { Button, Image, Card } from 'react-bootstrap';
+import { Button, Image, Card,Form } from 'react-bootstrap';
 import '../../css/profile/profile.css';
-import defimg from '../../media/profile/default.png';
+import defimg from '../../images/default.png';
 import {addVote,removeVote} from '../../redux/actions/votes';
 import {GetUserProfile} from '../../redux/actions/user';
 import {GetUserBlogs} from '../../redux/actions/blogs';
@@ -43,7 +43,7 @@ const Profile = (props) => {
 
         dispatch(GetUserProfile(userid));
         dispatch(GetUserBlogs(userid));
-    },[data.id]);
+    },[]);
 
     // adding the like to the backend
     const handleVote = (blogid,user_id,e) => {
@@ -102,7 +102,7 @@ const Profile = (props) => {
             </div>
         )
 });
-
+console.log((user_data.bio === undefined || user_data.bio === null));
     return(
         <div>
             <div className='profile-left-div'>
@@ -110,7 +110,7 @@ const Profile = (props) => {
                 { user_data.image !== undefined && <Image className='profile-img' src={user_data.image} roundedCircle />}<br/><br/>
                 <h6>{user_data.fullname}</h6>
                 <p>@{user_data.username}</p>                
-                <p>Contact:- {user_data.phone}</p>     
+                <p>Contact:- {user_data.phone}</p>    
                 <p>Email:- {user_data.email}</p><br/>
                 <h4>Bio</h4>
                 <p>{user_data.bio}</p>
