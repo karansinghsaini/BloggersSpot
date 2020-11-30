@@ -8,17 +8,41 @@ var jwt = require('jsonwebtoken');
 // importing our verifyToken function
 const verifyToken = require('./verifyToken');
 const route = express.Router();
-
+// for processing image
+const multer = require('multer');
 // secret key used while creating token.
 const secret = '53ddf1277aa9cce7f64fd176d566553322a86c139047a1d9c7a8e09c2500029ba167c9efba48fe49e9c81308f4d3c03c64016ad05478b3785432aea52ab5043a';
 
+// for storing profile image
+const Storage = multer.diskStorage({
+    destination: "./src/media/profile",
+    filename: function (req, file, cb) {
+        cb(null, Date.now()+file.originalname)
+      }
+});
+
+
+// const fileFilter=(req, file, cb)=>{
+//     if(file.mimetype ==='image/jpeg' || file.mimetype ==='image/jpg' || file.mimetype ==='image/png'){
+//         cb(null,true);
+//     }else{
+//         cb(null, false);
+//     }
+// }
+
+const upload = multer({
+    storage: Storage,
+    limits: {
+        fileSize: 1024 * 1024 * 5
+    }
+}).single('image');
 
 route.get('/profile/:id',verifyToken, (req, res) => {
     jwt.verify(req.token, secret, (err, authData) => {
         if(err) {
           res.sendStatus(403);
         } else {
-            users.find({_id: id}, (err, data) => {
+            users.find({_id: req.params.id}, (err, data) => {
                 if (err) return res.json({
                     success: false,
                     error: err.message
@@ -30,8 +54,16 @@ route.get('/profile/:id',verifyToken, (req, res) => {
 });
 
 
-route.put('/updateprofile/:id', verifyToken, (req, res) => {
-    const update = req.body;
+route.put('/updateprofile/:id', verifyToken,  upload, (req, res,next) => {
+    var update = {
+        "fullname": req.body.fullname,
+        "username": req.body.username,
+        "bio": req.body.bio,
+        "gender": req.body.gender,
+        "phone": req.body.phone,
+        "website": req.body.website,
+        "image": `../../media/profile/${req.file.filename}`
+    };
 
     jwt.verify(req.token, secret, (err, authData) => {
         if(err) {

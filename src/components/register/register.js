@@ -42,7 +42,7 @@ const Register = () => {
             <h3 className='register-head'>Register Today To Start Your Journey</h3>
             <div className='register-box'>
             <div className='register-container'>
-                <Form onSubmit={handleSubmit}>
+                <Form onSubmit={handleSubmit} >
                     <Form.Group controlId="formBasicUsername">
                         <Form.Label className='register-form-text'>Username</Form.Label>
                         <Form.Control type="text" value={username} placeholder="Enter Username" onChange = { (e) => setUsername(e.target.value)} required={true}/>
@@ -59,11 +59,18 @@ const Register = () => {
                     {/* Password Fields */}
                     <Form.Group controlId="formBasicPassword1">
                         <Form.Label className='register-form-text'>Password</Form.Label>
-                        <Form.Control type="password" placeholder="Password" onChange = { (e) => setPass1(e.target.value)} required={true}/>
+                        <Form.Control 
+                        type="password" placeholder="Password" 
+                        aria-describedby="passwordHelpInline"
+                        onChange = { (e) => setPass1(e.target.value)} 
+                        required={true}/>
                     </Form.Group>
                     <Form.Group controlId="formBasicPassword2">
                         <Form.Label className='register-form-text'>Confirm Password</Form.Label>
-                        <Form.Control type="password" placeholder="Password" onChange = { (e) => setPass2(e.target.value)} required={true}/>
+                        <Form.Control 
+                        type="password" placeholder="Password" 
+                        onChange = { (e) => setPass2(e.target.value)} 
+                        required={true}/>
                         <Form.Text id="passwordHelpBlock" className='register-form-text'>
                             Your password must be 8-20 characters long.
                         </Form.Text>

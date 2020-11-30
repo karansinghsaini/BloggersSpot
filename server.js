@@ -9,6 +9,7 @@ const port = process.env.PORT || 5000;
 connectDB();
 
 app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.static(path.join(__dirname, 'src')));
 app.use(cors());
 app.use(express.json({extended:false}));
 app.use('/user', require('./Api/user'));

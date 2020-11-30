@@ -32,8 +32,8 @@ const Menu = () => {
                 </Nav>
     
                 {isLoggedIn && <Form inline>
-                {/* <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                <Button variant="outline-info">Search</Button> */}
+                <FormControl type="text" placeholder="Search Authors" className="mr-sm-2" />
+                <Button variant="outline-dark">Search</Button>&nbsp;&nbsp;
                 Welcome {data.username}
                 </Form>}
             </Navbar>

@@ -21,25 +21,36 @@ const Profile = () => {
     const[gender, setGender] = useState(user_data.gender);
     const[phone, setPhone] = useState(user_data.phone);
     const[website, setWebsite] = useState('');
+    const[image,setImage] = useState(user_data.image);
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const updated_data = {
-            "fullname": fullname,
-            "username": username,
-            "bio": bio,
-            "gender": gender,
-            "phone": phone,
-            "website": website
-        };
-        dispatch(UpdateProfile(data.id, updated_data));
+        console.log("image:- ", image);
+        let update_data = new FormData();
+        update_data.append('fullname',fullname);
+        update_data.append('username',username);
+        update_data.append('bio',bio);
+        update_data.append('gender',gender);
+        update_data.append('phone',phone);
+        update_data.append('website',website);
+        update_data.append('image',image);
+        // const updated_data = {
+        //     "fullname": fullname,
+        //     "username": username,
+        //     "bio": bio,
+        //     "gender": gender,
+        //     "phone": phone,
+        //     "website": website,
+        //     "pimage": pimage
+        // };
+        dispatch(UpdateProfile(data.id, update_data));
     };
 
     return(
         <div className='profile-div'>
             <h3 className='profile-head'>Welcome To your Profile</h3>
             <div className='profile-container'>
-                <Form onSubmit={handleSubmit}>
+                <Form onSubmit={handleSubmit} encType='multipart/form-data'>
                 <Form.Row>
                     <Form.Group as={Col} md="4" controlId="validationCustom01">
                         <Form.Label>Full Name</Form.Label>
@@ -95,6 +106,12 @@ const Profile = () => {
                         value={gender}
                         required 
                         onChange = { (e) => setGender(e.target.value)}
+                        />
+                    </Form.Group>
+
+                    <Form.Group as={Col} md="3" controlId="profileimage">
+                        <Form.File label="Upload Image"
+                        onChange = { e => setImage(e.target.files[0])}
                         />
                     </Form.Group>
                 </Form.Row>

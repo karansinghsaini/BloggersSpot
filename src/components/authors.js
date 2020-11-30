@@ -32,7 +32,7 @@ const Authors = () => {
 
     const userList = users.map( user => {
         return(
-            <div key={user._id}>
+            <div key={user._id} classname='div-list-container'>
                 <h4 className='author-name' onClick= { (e) => handleProfileClick(user._id)}>{user.username}</h4>
             </div>
         );

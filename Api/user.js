@@ -6,8 +6,6 @@ var bcrypt = require('bcryptjs');
 // module for creating JWT tokens.
 var jwt = require('jsonwebtoken');
 //var nodemailer = require('nodemailer');
-// for processing image
-//const multer = require('multer');
 // importing our verifyToken function
 const verifyToken = require('./verifyToken');
 const route = express.Router();
@@ -138,32 +136,6 @@ route.put('/updateUser/:id', verifyToken, (req, res) => {
 
 
 
-
-//   const storage = multer.diskStorage({
-//     destination: function(req,file,cb){
-//         cb(null, '../src/media');
-//     },
-//     filename: function(req,file,cb){
-//         cb(null, Date.now() + file.originalname);
-//     }
-// });
-
-
-// const fileFilter = (req,file,cb) => {
-//     if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/png'){
-//         cb(null,true);
-//     } else {
-//         cb(null, false);
-//     }
-// };
-
-// const upload = multer({
-//     storage: storage,
-//     limits: {
-//         fileSize: 1024 * 1024 * 5
-//     },
-//     fileFilter: fileFilter
-// });
 
 // async function sendMail(id) {
 //     // Generate test SMTP service account from ethereal.email

@@ -6,7 +6,7 @@ import jwt from 'jsonwebtoken';
 
 import { Button, Image, Card } from 'react-bootstrap';
 import '../../css/profile/profile.css';
-import defimg from '../../images/default.jpg';
+import defimg from '../../media/profile/default.png';
 import {addVote,removeVote} from '../../redux/actions/votes';
 import {GetUserProfile} from '../../redux/actions/user';
 import {GetUserBlogs} from '../../redux/actions/blogs';
@@ -43,7 +43,7 @@ const Profile = (props) => {
 
         dispatch(GetUserProfile(userid));
         dispatch(GetUserBlogs(userid));
-    },[]);
+    },[data.id]);
 
     // adding the like to the backend
     const handleVote = (blogid,user_id,e) => {
@@ -103,12 +103,11 @@ const Profile = (props) => {
         )
 });
 
-
-
     return(
         <div>
             <div className='profile-left-div'>
-                <Image className='profile-img' src={defimg} roundedCircle /><br/><br/>
+                { user_data.image === undefined && <Image className='profile-img' src={defimg} roundedCircle />}<br/><br/>
+                { user_data.image !== undefined && <Image className='profile-img' src={user_data.image} roundedCircle />}<br/><br/>
                 <h6>{user_data.fullname}</h6>
                 <p>@{user_data.username}</p>                
                 <p>Contact:- {user_data.phone}</p>     

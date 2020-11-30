@@ -35,7 +35,11 @@ const Login = () => {
                     {/* Password Fields */}
                     <Form.Group controlId="formBasicPassword">
                         <Form.Label className='login-form-text'>Password</Form.Label>
-                        <Form.Control type="password" placeholder="Password" onChange = { (e) => setPass(e.target.value)} required="true"/>
+                        <Form.Control 
+                        type="password" placeholder="Password" 
+                        aria-describedby="passwordHelpInline"
+                        onChange = { (e) => setPass(e.target.value)} 
+                        required="true"/>
                     </Form.Group>
                     
                     <Button variant="primary" type="submit">
