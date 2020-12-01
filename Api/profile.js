@@ -68,33 +68,33 @@ route.get('/profile/:id',verifyToken, (req, res) => {
     });
 });
 
-// route.put('/updateprofilephoto/:id', verifyToken, parser, (req, res,next) => {
-//     console.log(req.file);
-//     var update = {
-//         "image": req.file.path
-//     };
+route.put('/updateprofilephoto/:id', verifyToken, parser, (req, res,next) => {
+    console.log(req.file);
+    var update = {
+        "image": req.file.path
+    };
 
-//     jwt.verify(req.token, secret, (err, authData) => {
-//         if(err) {
-//           res.sendStatus(403);
-//         } 
-//         if(req.params.id === authData.id){
-//             users.findByIdAndUpdate({ _id: req.params.id }, update, err => {
-//                 if (err) return res.json({
-//                     success: false,
-//                     error: err
-//                 });
-//                 return res.json({
-//                     success: true,
-//                     authData
-//                 });
-//             });
-//         }
-//         else{
-//             return res.json("Not Authorised");
-//         }
-//     });
-// });
+    jwt.verify(req.token, secret, (err, authData) => {
+        if(err) {
+          res.sendStatus(403);
+        } 
+        if(req.params.id === authData.id){
+            users.findByIdAndUpdate({ _id: req.params.id }, update, err => {
+                if (err) return res.json({
+                    success: false,
+                    error: err
+                });
+                return res.json({
+                    success: true,
+                    authData
+                });
+            });
+        }
+        else{
+            return res.json("Not Authorised");
+        }
+    });
+});
 
 route.put('/updateprofile/:id', verifyToken,  parser, (req, res,next) => {
     console.log(req.file);

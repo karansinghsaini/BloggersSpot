@@ -2,9 +2,10 @@ import React, {useEffect, useState} from 'react';
 import { Redirect } from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 
+import MyVerticallyCenteredModal from './uploadPhoto';
 import jwt from 'jsonwebtoken';
 
-import { Button, Image, Card,Form } from 'react-bootstrap';
+import { Button, Image, Card } from 'react-bootstrap';
 import '../../css/profile/profile.css';
 import defimg from '../../images/default.png';
 import {addVote,removeVote} from '../../redux/actions/votes';
@@ -16,6 +17,7 @@ import { FaRegHeart } from "react-icons/fa";
 
 
 const Profile = (props) => {
+    const [modalShow, setModalShow] = useState(false);
     // declaring the userid
     var userid;
   
@@ -78,7 +80,6 @@ const Profile = (props) => {
     if(navigate){
         return <Redirect to='/update-profile' push={true} />
     }
- 
 
     var blogList = user_blogs.map( (details) => {
         var vote = votes.filter( vote => vote.blog_id === details._id);
@@ -102,12 +103,12 @@ const Profile = (props) => {
             </div>
         )
 });
-console.log((user_data.bio === undefined || user_data.bio === null));
+
     return(
         <div>
             <div className='profile-left-div'>
-                { user_data.image === undefined && <Image className='profile-img' src={defimg} roundedCircle />}<br/><br/>
-                { user_data.image !== undefined && <Image className='profile-img' src={user_data.image} roundedCircle />}<br/><br/>
+                { user_data.image === undefined && <Image className='profile-img' src={defimg} roundedCircle onClick={() => setModalShow(true)}/>}<br/><br/>
+                { user_data.image !== undefined && <Image className='profile-img' src={user_data.image} roundedCircle onClick={() => setModalShow(true)} />}<br/><br/>
                 <h6>{user_data.fullname}</h6>
                 <p>@{user_data.username}</p>                
                 <p>Contact:- {user_data.phone}</p>    
@@ -123,6 +124,11 @@ console.log((user_data.bio === undefined || user_data.bio === null));
                 {blogList}
             </div>
 
+            <MyVerticallyCenteredModal 
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+                user_data={user_data}
+            />
             
         </div>
     );

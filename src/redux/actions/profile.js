@@ -22,5 +22,16 @@ export function UpdateProfile(id, data){
             alert('Profile Updated Successfully');
             window.location.href = '/profile';
         });
-    }
+    };
+}
+
+
+export function UpdateProfilePhoto(id,data){
+    return dispatch => {
+        axios.put(`/profile/updateprofilephoto/${id}`, data)
+        .then( res => {
+            dispatch({type: 'PROFILEPHOTO', payload: res})
+            alert("Profile Photo updated successfully");
+        });
+    };
 }

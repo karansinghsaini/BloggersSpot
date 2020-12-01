@@ -17,7 +17,9 @@ export const UserProfile = (state = myState, action) => {
             return state;
 
         case 'Updated':
-            console.log('Updated Profile');
+            return Object.assign({}, state, {curr_user_data: action.payload.data});
+
+        case "PROFILEPHOTO":
             return Object.assign({}, state, {curr_user_data: action.payload.data});
 
         default:

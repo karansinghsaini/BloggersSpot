@@ -18,6 +18,7 @@
 .profile-img{
     width: 140px;
     height: 131px;
+    cursor: pointer;
 }
 
 /* for desktop */
@@ -38,6 +39,7 @@
     .profile-img{
         width: 180px;
         height: 171px;
+        cursor: pointer;
     }
 }
 
@@ -59,5 +61,6 @@
     .profile-img{
         width: 140px;
         height: 131px;
+        cursor: pointer;
     }
 }

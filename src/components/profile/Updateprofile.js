@@ -13,19 +13,17 @@ const Profile = () => {
 
     useEffect( () => {
         dispatch(GetUserProfile(data.id));
-    }, []);
+    },[]);
 
     const[username,setUsername] = useState(user_data.username);
     const[fullname, setFullname] = useState(user_data.fullname);
     const[bio, setBio] = useState(user_data.bio);
     const[gender, setGender] = useState(user_data.gender);
     const[phone, setPhone] = useState(user_data.phone);
-    const[website, setWebsite] = useState('');
-    const[image,setImage] = useState(user_data.image);
+    const[website, setWebsite] = useState(user_data.website);
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log("image:- ", image);
         let update_data = new FormData();
         update_data.append('fullname',fullname);
         update_data.append('username',username);
@@ -33,16 +31,6 @@ const Profile = () => {
         update_data.append('gender',gender);
         update_data.append('phone',phone);
         update_data.append('website',website);
-        update_data.append('image',image);
-        // const updated_data = {
-        //     "fullname": fullname,
-        //     "username": username,
-        //     "bio": bio,
-        //     "gender": gender,
-        //     "phone": phone,
-        //     "website": website,
-        //     "pimage": pimage
-        // };
         dispatch(UpdateProfile(data.id, update_data));
     };
 
@@ -106,12 +94,6 @@ const Profile = () => {
                         value={gender}
                         required 
                         onChange = { (e) => setGender(e.target.value)}
-                        />
-                    </Form.Group>
-
-                    <Form.Group as={Col} md="3" controlId="profileimage">
-                        <Form.File label="Upload Image"
-                        onChange = { e => setImage(e.target.files[0])}
                         />
                     </Form.Group>
                 </Form.Row>
