@@ -42,7 +42,7 @@ const Profile = (props) => {
         else{
             userid = props.location.state.user_id;
         }
-
+        console.log(props.location.state.user_id);
         dispatch(GetUserProfile(userid));
         dispatch(GetUserBlogs(userid));
     },[]);
@@ -110,7 +110,7 @@ const Profile = (props) => {
             </div>
         )
 });
-console.log( (user_data.bio !== undefined && user_data.bio !== null) );
+
     return(
         <div>
             <div className='profile-left-div'>
@@ -125,8 +125,8 @@ console.log( (user_data.bio !== undefined && user_data.bio !== null) );
                 />  }   <br/><br/>
 
                 {/* User Details */}
-                <h6>{user_data.fullname}</h6>
-                { (user_data.username !== undefined && user_data.username !== null) && <p>@{user_data.username}</p>}
+                {(user_data.fullname !== undefined && user_data.fullname !== null) && <h6>Fullname:- {user_data.fullname}</h6>}
+                { (user_data.username !== undefined && user_data.username !== null) && <p> Username:- @{user_data.username}</p>}
                 { (user_data.phone !== undefined && user_data.phone !== null) && <p>Contact:- {user_data.phone}</p>}    
                 { (user_data.email !== undefined && user_data.email !== null) && <p>Email:- {user_data.email}</p>}<br/>
                 { (user_data.bio !== undefined && user_data.bio !== null) && <h4>Bio</h4> }

@@ -6,14 +6,13 @@ const votes = require('../models/votes');
 var jwt = require('jsonwebtoken');
 // importing our verifyToken function
 const verifyToken = require('./verifyToken');
-
+require('dotenv').config();
 const route = express.Router();
 
-// secret key used while creating token.
-const secret = '53ddf1277aa9cce7f64fd176d566553322a86c139047a1d9c7a8e09c2500029ba167c9efba48fe49e9c81308f4d3c03c64016ad05478b3785432aea52ab5043a';
+
 
 route.post('/newblog', verifyToken, (req,res) => {
-    jwt.verify(req.token, secret, (err, authData) => {
+    jwt.verify(req.token, process.env.Secret, (err, authData) => {
         if(err) {
           res.sendStatus(403);
         } else {
@@ -42,7 +41,7 @@ route.post('/newblog', verifyToken, (req,res) => {
 
 route.get('/getBlogs', verifyToken, (req, res) => {
 
-    jwt.verify(req.token, secret, (err, authData) => {
+    jwt.verify(req.token, process.env.Secret, (err, authData) => {
         if(err) {
           res.sendStatus(403);
         } else {
@@ -64,7 +63,7 @@ route.get('/getBlogs', verifyToken, (req, res) => {
 });
 
 route.get('/getBlog/:id', verifyToken, (req, res) => {
-    jwt.verify(req.token, secret, (err, authData) => {
+    jwt.verify(req.token, process.env.Secret, (err, authData) => {
         if(err) {
           res.sendStatus(403);
         } else {
@@ -88,7 +87,7 @@ route.get('/getBlog/:id', verifyToken, (req, res) => {
 route.delete('/deleteBlogs/:id', verifyToken, function (req, res) {
     
 
-    jwt.verify(req.token, secret, (err, authData) => {
+    jwt.verify(req.token, process.env.Secret, (err, authData) => {
         if(err) {
           res.sendStatus(403);
         } else {
@@ -106,7 +105,7 @@ route.delete('/deleteBlogs/:id', verifyToken, function (req, res) {
 route.put('/updateBlogs/:id', verifyToken, (req, res) => {
     const update = req.body;
 
-    jwt.verify(req.token, secret, (err, authData) => {
+    jwt.verify(req.token, process.env.Secret, (err, authData) => {
         if(err) {
           res.sendStatus(403);
         } else {

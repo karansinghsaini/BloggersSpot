@@ -9,10 +9,7 @@ var jwt = require('jsonwebtoken');
 // importing our verifyToken function
 const verifyToken = require('./verifyToken');
 const route = express.Router();
-
-// secret key used while creating token.
-const secret = '53ddf1277aa9cce7f64fd176d566553322a86c139047a1d9c7a8e09c2500029ba167c9efba48fe49e9c81308f4d3c03c64016ad05478b3785432aea52ab5043a';
-
+require('dotenv').config();
 
 // Register Route. Saving the users data in the users model. 
 route.post('/createUser',async (req,res) => {
@@ -58,7 +55,7 @@ route.post('/loginUser',async (req,res) => {
         // Checking for errors and if the passwords are similar    
         if(!err && isMatch) {
             // creating a JWT token 
-            var token = jwt.sign(user_data, secret, { expiresIn: "4h" });
+            var token = jwt.sign(user_data, process.env.Secret, { expiresIn: "4h" });
             res.json({token,user_data});
         } else {
             res.status(401).json({ error: 'Sorry, your username or password was incorrect. Please double-check your password.' });
@@ -98,7 +95,7 @@ route.get('/getUser/:id', (req,res) => {
 route.delete('/deleteUser/:id', verifyToken, function (req, res) {
     
 
-    jwt.verify(req.token, secret, (err, authData) => {
+    jwt.verify(req.token, process.env.Secret, (err, authData) => {
         if(err) {
           res.sendStatus(403);
         } else {
@@ -116,7 +113,7 @@ route.delete('/deleteUser/:id', verifyToken, function (req, res) {
 route.put('/updateUser/:id', verifyToken, (req, res) => {
     const update = req.body;
 
-    jwt.verify(req.token, secret, (err, authData) => {
+    jwt.verify(req.token, process.env.Secret, (err, authData) => {
         if(err) {
           res.sendStatus(403);
         } else {

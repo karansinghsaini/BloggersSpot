@@ -33,7 +33,7 @@ const Menu = () => {
     
                 {isLoggedIn && <Form inline>
                 <FormControl type="text" placeholder="Search Authors" className="mr-sm-2" />
-                <Button variant="outline-dark">Search</Button>&nbsp;&nbsp;
+                <Button variant="outline-info">Search</Button>&nbsp;&nbsp;
                 Welcome {data.username}
                 </Form>}
             </Navbar>

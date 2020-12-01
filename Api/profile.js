@@ -14,7 +14,7 @@ const multer = require('multer');
 // secret key used while creating token.
 const cloudinary = require("cloudinary").v2;
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
-const secret = '53ddf1277aa9cce7f64fd176d566553322a86c139047a1d9c7a8e09c2500029ba167c9efba48fe49e9c81308f4d3c03c64016ad05478b3785432aea52ab5043a';
+
 
 // cloudinary configuration
 cloudinary.config({
@@ -74,7 +74,7 @@ route.put('/updateprofilephoto/:id', verifyToken, parser, (req, res,next) => {
         "image": req.file.path
     };
 
-    jwt.verify(req.token, secret, (err, authData) => {
+    jwt.verify(req.token, process.env.Secret, (err, authData) => {
         if(err) {
           res.sendStatus(403);
         } 
@@ -108,7 +108,7 @@ route.put('/updateprofile/:id', verifyToken,  parser, (req, res,next) => {
         "image": req.file.path
     };
 
-    jwt.verify(req.token, secret, (err, authData) => {
+    jwt.verify(req.token, process.env.Secret, (err, authData) => {
         if(err) {
           res.sendStatus(403);
         } 
@@ -132,7 +132,7 @@ route.put('/updateprofile/:id', verifyToken,  parser, (req, res,next) => {
 
 
 route.get('/userblogs/:id',verifyToken, (req,res) => {
-    jwt.verify(req.token, secret, (err, authData) => {
+    jwt.verify(req.token, process.env.Secret, (err, authData) => {
         if(err) {
           res.sendStatus(403);
         } else {

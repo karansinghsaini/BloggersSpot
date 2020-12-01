@@ -32,6 +32,7 @@ export function UpdateProfilePhoto(id,data){
         .then( res => {
             dispatch({type: 'PROFILEPHOTO', payload: res})
             alert("Profile Photo updated successfully");
+            window.location.href = '/profile';
         });
     };
 }
