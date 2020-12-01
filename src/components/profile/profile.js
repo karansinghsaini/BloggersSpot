@@ -47,6 +47,12 @@ const Profile = (props) => {
         dispatch(GetUserBlogs(userid));
     },[]);
 
+    const handleUploadPhoto = (e,id) =>{
+        if(data.id === user_data._id){
+            setModalShow(true);
+        }
+    }
+
     // adding the like to the backend
     const handleVote = (blogid,user_id,e) => {
         dispatch(addVote(data.id,blogid));
@@ -81,6 +87,7 @@ const Profile = (props) => {
         return <Redirect to='/update-profile' push={true} />
     }
 
+
     var blogList = user_blogs.map( (details) => {
         var vote = votes.filter( vote => vote.blog_id === details._id);
         var isliked = vote.some( vt => (vt.user_id === data.id));
@@ -103,18 +110,27 @@ const Profile = (props) => {
             </div>
         )
 });
-
+console.log( (user_data.bio !== undefined && user_data.bio !== null) );
     return(
         <div>
             <div className='profile-left-div'>
-                { user_data.image === undefined && <Image className='profile-img' src={defimg} roundedCircle onClick={() => setModalShow(true)}/>}<br/><br/>
-                { user_data.image !== undefined && <Image className='profile-img' src={user_data.image} roundedCircle onClick={() => setModalShow(true)} />}<br/><br/>
+                {/* User Profile picture */}
+                { user_data.image === undefined && 
+                    <Image className='profile-img' src={defimg} roundedCircle 
+                    onClick={(e) => handleUploadPhoto(e)}
+                />  }   <br/><br/>
+                {  (user_data.image !== undefined && user_data.image !== null) &&
+                     <Image className='profile-img' src={user_data.image} roundedCircle 
+                     onClick={(e) => handleUploadPhoto(e)} 
+                />  }   <br/><br/>
+
+                {/* User Details */}
                 <h6>{user_data.fullname}</h6>
-                <p>@{user_data.username}</p>                
-                <p>Contact:- {user_data.phone}</p>    
-                <p>Email:- {user_data.email}</p><br/>
-                <h4>Bio</h4>
-                <p>{user_data.bio}</p>
+                { (user_data.username !== undefined && user_data.username !== null) && <p>@{user_data.username}</p>}
+                { (user_data.phone !== undefined && user_data.phone !== null) && <p>Contact:- {user_data.phone}</p>}    
+                { (user_data.email !== undefined && user_data.email !== null) && <p>Email:- {user_data.email}</p>}<br/>
+                { (user_data.bio !== undefined && user_data.bio !== null) && <h4>Bio</h4> }
+                <p>{user_data.bio}</p> 
                 { (data.id === user_data._id) && <Button variant="secondary" size="sm" onClick={handleUpdate} >Update profile</Button>}
             </div><br />
 
