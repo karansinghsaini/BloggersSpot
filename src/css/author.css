@@ -1,7 +1,35 @@
 .author-name{
-    font-family: fantasy;
+    font-family: cursive;
     font-variant: small-caps;
     font-style: oblique;
-    font-weight: 700;
     cursor: pointer;
+    font-size: small;
+}
+
+.author-img{
+    height: 50px;
+    width: 50px;
+    cursor: pointer;
+}
+
+@media only screen and (min-width: 800px){
+    .author-img{
+        height: 100px;
+        width: 100px;
+    }
+
+    .author-name{
+        font-size: larger;
+    }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 800px){
+    .author-img{
+        height: 70px;
+        width: 70px;
+    }
+
+    .author-name{
+        font-size: large;
+    }
 }

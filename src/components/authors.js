@@ -1,9 +1,12 @@
 import React, {useEffect,useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
+import {Image} from 'react-bootstrap';
 import {GetAllUsers} from '../redux/actions/user';
 import {Redirect} from 'react-router-dom';
+
 import '../css/author.css';
+import defimg from '../images/default.png';
 
 const Authors = () => {
     const dispatch = useDispatch();
@@ -24,8 +27,7 @@ const Authors = () => {
     // if user clicked on username then redirecting to user-profile
     if(profileNav){
         return < Redirect to ={ {
-            pathname: '/profile',
-            state: { user_id: author }
+            pathname: `/profile/${author}`
             }} 
             />;
     }
@@ -33,7 +35,15 @@ const Authors = () => {
     const userList = users.map( user => {
         return(
             <div key={user._id} classname='div-list-container'>
-                <h4 className='author-name' onClick= { (e) => handleProfileClick(user._id)}>{user.username}</h4>
+                { user.image === undefined && 
+                    <Image className='author-img' src={defimg} roundedCircle 
+                    onClick={(e) =>handleProfileClick(user._id)}
+                />  }
+                {  (user.image !== undefined && user.image !== null) &&
+                     <Image className='author-img' src={user.image} roundedCircle 
+                     onClick={(e) => handleProfileClick(user._id)} 
+                />  } 
+                <h4 className='author-name' onClick= { (e) => handleProfileClick(user._id)}>{user.username}</h4><br />
             </div>
         );
     });
