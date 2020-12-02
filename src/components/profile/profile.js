@@ -36,7 +36,7 @@ const Profile = () => {
     useEffect( () => {
         dispatch(GetUserProfile(userid));
         dispatch(GetUserBlogs(userid));
-    },[]);
+    },[votes,user_data]);
 
     const handleUploadPhoto = (e,id) =>{
         if(data.id === user_data._id){

@@ -42,7 +42,7 @@ const Home = () => {
 
     useEffect (() => {
         dispatch(getBlogs());        
-    }, []);
+    }, [votes]);
 
     const handleBlogClick = (id,e) => {
         setBlogId(id);
