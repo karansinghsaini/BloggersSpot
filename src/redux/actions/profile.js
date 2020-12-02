@@ -20,7 +20,7 @@ export function UpdateProfile(id, data){
         .then( res => {
             dispatch(Updated(res));
             alert('Profile Updated Successfully');
-            window.location.href = '/profile';
+            window.location.href = `/profile/${id}`;
         });
     };
 }
@@ -32,7 +32,7 @@ export function UpdateProfilePhoto(id,data){
         .then( res => {
             dispatch({type: 'PROFILEPHOTO', payload: res})
             alert("Profile Photo updated successfully");
-            window.location.href = '/profile';
+            window.location.href = `/profile/${id}`;
         });
     };
 }
