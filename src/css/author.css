@@ -3,12 +3,13 @@
     font-variant: small-caps;
     font-style: oblique;
     cursor: pointer;
-    font-size: small;
+    font-size: large;
+    font-weight: 600;
 }
 
 .author-img{
-    height: 50px;
-    width: 50px;
+    height: 70px;
+    width: 70px;
     cursor: pointer;
 }
 
@@ -25,8 +26,8 @@
 
 @media only screen and (min-width: 600px) and (max-width: 800px){
     .author-img{
-        height: 70px;
-        width: 70px;
+        height: 85px;
+        width: 85px;
     }
 
     .author-name{
