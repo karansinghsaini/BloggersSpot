@@ -38,12 +38,13 @@ const App = () => {
 
                       <Route path='/login' component={Login} />
                       <Route path='/logout' component={Logout} />
-                      <Route path='/profile' render={(props) => <Profile {...props}/>} />
+                      {/* <Route path='/profile' render={(props) => <Profile {...props}/>} /> */}
+                      <Route path='/profile/:userid' component={Profile} />
                       <Route path='/update-profile' component={Updateprofile} />
                       <Route path='/authors' component={Author} />
                       <Route path='/new-blog' component={Blog} />
                       <Route path='/authors' component={Author} />
-                      <Route path='/blog-detail' render={(props) => <Detail {...props}/>} />
+                      <Route path='/blog-detail/:blogid' component={Detail} />
                   
                   </Switch>
 

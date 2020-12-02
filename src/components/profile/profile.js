@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { Redirect } from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
-
+import { useParams } from "react-router-dom";
 import MyVerticallyCenteredModal from './uploadPhoto';
 import jwt from 'jsonwebtoken';
 
@@ -16,11 +16,10 @@ import { FaHeart } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
 
 
-const Profile = (props) => {
-    const [modalShow, setModalShow] = useState(false);
-    // declaring the userid
-    var userid;
-  
+const Profile = () => {
+    // getting userid from the url params
+    const { userid } = useParams();
+    const [modalShow, setModalShow] = useState(false);  
     // getting userdata from token
     const data = jwt.decode(localStorage.jwtToken);
     // for update-profile
@@ -35,14 +34,6 @@ const Profile = (props) => {
     const dispatch = useDispatch();
     
     useEffect( () => {
-        // checking if user_id is passed as props or not ( when we clicked on username on blogs )
-        if(props.location.state === undefined){
-            userid = data.id;
-        }
-        else{
-            userid = props.location.state.user_id;
-        }
-        console.log(props.location.state.user_id);
         dispatch(GetUserProfile(userid));
         dispatch(GetUserBlogs(userid));
     },[]);
@@ -77,8 +68,7 @@ const Profile = (props) => {
 
     if(blognavigate){
         return < Redirect to ={ {
-            pathname: '/blog-detail',
-            state: { blog_id: blogid }
+            pathname: `/blog-detail/${blogid}`
           }} 
           />;
     }

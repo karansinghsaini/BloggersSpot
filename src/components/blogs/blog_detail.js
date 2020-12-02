@@ -1,6 +1,6 @@
 import React, {useEffect,useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {Redirect} from 'react-router-dom';
+import {Redirect, useParams} from 'react-router-dom';
 
 import {Card} from 'react-bootstrap';
 import jwt from 'jsonwebtoken';
@@ -18,11 +18,11 @@ import { MdDelete } from "react-icons/md";
 import '../../css/home.css';
 
 //Blog Detail component
-const Detail = (props) => {
+const Detail = () => {
+    // getting blogid from url params
+    const { blogid } = useParams();
     //data of user
     const data = jwt.decode(localStorage.jwtToken);
-    //getting blogid from localstorage
-    var blogid = props.location.state.blog_id;
     // getting the data from backend
     const blog = useSelector( state => state.blogReducer.blogDetail);
     // total number of likes the selected blog has got
@@ -78,12 +78,11 @@ const Detail = (props) => {
     // if user clicked on username then redirecting to user-profile
     if(profileNav){
         return < Redirect to ={ {
-            pathname: '/profile',
-            state: { user_id: author }
+            pathname: `/profile/${author}`
           }} 
           />;
     }
-
+console.log(blogid);
 
     return (
         <div className='blogs-detail'>

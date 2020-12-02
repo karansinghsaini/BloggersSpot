@@ -18,7 +18,7 @@ const Menu = () => {
                 {isLoggedIn && <Nav.Link href="/new-blog">New Blog</Nav.Link>}
                 {isLoggedIn && <Nav.Link href="/authors">Find Authors</Nav.Link>}
                 {isLoggedIn && <NavDropdown title="Profile" id="collasible-nav-dropdown">
-                    <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
+                    <NavDropdown.Item href = {`/profile/${data.id}`}>Profile</NavDropdown.Item>
                     {/* <NavDropdown.Item href="/settings">Settings</NavDropdown.Item>
                     <NavDropdown.Item href="#">Something</NavDropdown.Item> */}
                     <NavDropdown.Divider />
@@ -32,8 +32,8 @@ const Menu = () => {
                 </Nav>
     
                 {isLoggedIn && <Form inline>
-                <FormControl type="text" placeholder="Search Authors" className="mr-sm-2" />
-                <Button variant="outline-info">Search</Button>&nbsp;&nbsp;
+                {/* <FormControl type="text" placeholder="Search Authors" className="mr-sm-2" />
+                <Button variant="outline-info">Search</Button>&nbsp;&nbsp; */}
                 Welcome {data.username}
                 </Form>}
             </Navbar>

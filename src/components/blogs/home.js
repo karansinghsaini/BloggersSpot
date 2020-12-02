@@ -57,8 +57,7 @@ const Home = () => {
     // If user clicked on Blogs then redirecting to blogs-detail
     if(blogNav){
         return < Redirect to ={ {
-            pathname: '/blog-detail',
-            state: { blog_id: blogid }
+            pathname: `/blog-detail/${blogid}`
           }} 
           />;
     }
@@ -66,8 +65,7 @@ const Home = () => {
     // if user clicked on username then redirecting to user-profile
     if(profileNav){
         return < Redirect to ={ {
-            pathname: '/profile',
-            state: { user_id: author }
+            pathname: `/profile/${author}`
           }} 
           />;
     }
