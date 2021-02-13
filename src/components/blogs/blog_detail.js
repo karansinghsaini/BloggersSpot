@@ -14,6 +14,7 @@ import {getComments} from '../../redux/actions/comments';
 import { FaHeart } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import { FaEdit } from "react-icons/fa";
 
 import '../../css/home.css';
 
@@ -47,7 +48,7 @@ const Detail = () => {
     useEffect( () => {
         dispatch(getBlog(blogid));
         dispatch(getComments(blogid));
-    }, []);
+    }, [isliked]);
 
     const handleDelete = () => {
         if(window.confirm('Are you sure you want to delete this blog?')){
@@ -69,6 +70,10 @@ const Detail = () => {
         dispatch(getBlog(blogid));
     };
 
+    const handleEdit = (e) => {
+        console.log("Editing");
+    }
+
     const handleProfileClick = (id,e) => {
         setAuthor(id)
         //localStorage.setItem('userid', id);
@@ -82,7 +87,6 @@ const Detail = () => {
           }} 
           />;
     }
-console.log(blogid);
 
     return (
         <div className='blogs-detail'>
@@ -97,7 +101,8 @@ console.log(blogid);
                 <Card.Footer style={{ textAlign: 'left' }}>
                     { !isliked && <FaRegHeart className='blog-detail-icon'  onClick={handleVote} />}&nbsp;
                     { isliked && <FaHeart className='blog-detail-icon' onClick={handleUnvote} />}&nbsp;
-                    <span>{vote.length}</span>
+                    <span>{vote.length}</span>&nbsp;
+                    { (data.id === blog.user_id) && <FaEdit className='blog-detail-edit edit' onClick={ (e) => handleEdit(e)}/>}
                     { (data.id === blog.user_id) && <MdDelete className='blog-detail-icon delete' onClick={handleDelete}/>}
                 </Card.Footer>
             </Card><br/>

@@ -11,8 +11,16 @@
     cursor: pointer;
 }
 
+.blog-detail-edit{
+    cursor: pointer;
+}
+
 .delete{
-    margin-left: 90%;
+    margin-left: 80%;
+}
+
+.edit{
+    margin-left: 2rem;
 }
 
 /* for mobile phones */
