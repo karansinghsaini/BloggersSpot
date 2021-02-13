@@ -15,14 +15,6 @@
     cursor: pointer;
 }
 
-.delete{
-    margin-left: 80%;
-}
-
-.edit{
-    margin-left: 2rem;
-}
-
 /* for mobile phones */
 .blogs-list{
     margin: auto;
@@ -31,6 +23,15 @@
 .blogs-detail{
     margin: 40px auto;
 }
+
+  
+.dropdown {
+    margin-left: 80%;
+    padding-left: 1rem;
+    position: relative;
+    display: inline-block;
+}
+  
 
 /* for desktop */
 @media only screen and (min-width: 800px){

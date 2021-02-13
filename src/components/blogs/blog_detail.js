@@ -2,7 +2,7 @@ import React, {useEffect,useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {Redirect, useParams} from 'react-router-dom';
 
-import {Card} from 'react-bootstrap';
+import {Card, Dropdown} from 'react-bootstrap';
 import jwt from 'jsonwebtoken';
 // importing comments component
 import Comments from './comments';
@@ -15,6 +15,8 @@ import { FaHeart } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
+import { FaEllipsisV } from "react-icons/fa";
+import { FaShareSquare } from "react-icons/fa";
 
 import '../../css/home.css';
 
@@ -71,6 +73,7 @@ const Detail = () => {
     };
 
     const handleEdit = (e) => {
+        e.preventDefault();
         console.log("Editing");
     }
 
@@ -91,7 +94,13 @@ const Detail = () => {
     return (
         <div className='blogs-detail'>
             <Card className="text-center blog-card" key={blog._id} bg='info'>
-                <Card.Header className='card-title-home' onClick={(e) => handleProfileClick(blog.user_id,e)}>@{blog.author}</Card.Header>
+                <Card.Header className='card-title-home'>
+                    <div>
+                    <span onClick={(e) => handleProfileClick(blog.user_id,e)}>@{blog.author}</span>
+
+                    </div>
+
+                </Card.Header>
                 <Card.Body>
                 <Card.Title>{blog.title}</Card.Title>
                 <Card.Text className='card-text'>
@@ -102,8 +111,21 @@ const Detail = () => {
                     { !isliked && <FaRegHeart className='blog-detail-icon'  onClick={handleVote} />}&nbsp;
                     { isliked && <FaHeart className='blog-detail-icon' onClick={handleUnvote} />}&nbsp;
                     <span>{vote.length}</span>&nbsp;
-                    { (data.id === blog.user_id) && <FaEdit className='blog-detail-edit edit' onClick={ (e) => handleEdit(e)}/>}
-                    { (data.id === blog.user_id) && <MdDelete className='blog-detail-icon delete' onClick={handleDelete}/>}
+                    {/* { (data.id === blog.user_id) && <FaEdit className='blog-detail-edit edit' onClick={ (e) => handleEdit(e)}/>}
+                    { (data.id === blog.user_id) && <MdDelete className='blog-detail-icon delete' onClick={handleDelete}/>} */}
+
+                    <Dropdown size="sm" className='dropdown'>
+                        <Dropdown.Toggle variant="secondary">
+                            
+                        </Dropdown.Toggle>
+
+                        <Dropdown.Menu>
+                            { (data.id === blog.user_id) && <Dropdown.Item onClick={ (e) => handleEdit(e)}><FaEdit className='blog-detail-edit' />&nbsp; Edit</Dropdown.Item>}
+                            { (data.id === blog.user_id) && <Dropdown.Item onClick={handleDelete}><MdDelete className='blog-detail-edit' />&nbsp; Delete</Dropdown.Item>}
+                            <Dropdown.Item ><FaShareSquare/>&nbsp;Share</Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
+
                 </Card.Footer>
             </Card><br/>
 
