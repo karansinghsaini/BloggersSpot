@@ -75,7 +75,7 @@ const Blog = (props) => {
                         cols={55} 
                         value={content} 
                         onChange={ (e) => setContent(e.target.value)}
-                        autoResize />
+                         />
                 </InputGroup><br />
 
                 
