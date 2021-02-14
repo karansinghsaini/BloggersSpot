@@ -1,6 +1,6 @@
 import React, {useState,useEffect} from 'react';
 import {InputGroup, FormControl, Button} from 'react-bootstrap';
-
+import { InputTextarea } from 'primereact/inputtextarea';
 import {getBlog} from '../../redux/actions/blogs';
 
 import {useDispatch,useSelector} from 'react-redux';
@@ -47,8 +47,7 @@ const Blog = (props) => {
         };
         dispatch(UpdateBlog(blogid,data));
     }
-console.log("Checking Bloga:- ",blog);
-console.log("Checking Blog Detail:- ",title);
+
     return (
         <div>
             <h3 className='blog-head'>New Blog</h3>
@@ -70,12 +69,16 @@ console.log("Checking Blog Detail:- ",title);
                     <InputGroup.Prepend>
                     <InputGroup.Text>Blog Content</InputGroup.Text>
                     </InputGroup.Prepend>
-                    <FormControl 
-                    as="textarea" 
-                    aria-label="With textarea" 
-                    value = {content}
-                    onChange={ (e) => setContent(e.target.value)} />
+                    <InputTextarea 
+                        className="p-inputtext-sm" 
+                        rows={5} 
+                        cols={55} 
+                        value={content} 
+                        onChange={ (e) => setContent(e.target.value)}
+                        autoResize />
                 </InputGroup><br />
+
+                
 
                 { blogid==undefined && <Button variant="primary" type="submit" onClick={handleBlogSubmit}>
                         Post Blog
