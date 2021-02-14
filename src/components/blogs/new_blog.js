@@ -9,7 +9,7 @@ import {createBlog,UpdateBlog} from '../../redux/actions/blogs';
 import '../../css/blog.css';
 
 const Blog = (props) => {
-    var blogid = props.location.state.blog_id;
+    var blogid;
     // getting the data from backend
     const blog = useSelector( state => state.blogReducer.blogDetail);
 
@@ -19,7 +19,8 @@ const Blog = (props) => {
     const dispatch = useDispatch();
 
     useEffect( () => {
-        if (blogid != undefined){
+        if ( props.location.state!= undefined){
+            blogid  = props.location.state.blog_id;
             dispatch(getBlog(blogid));
         }
         setTitle(blog.title);
