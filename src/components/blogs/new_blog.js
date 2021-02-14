@@ -1,29 +1,53 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import {InputGroup, FormControl, Button} from 'react-bootstrap';
 
-import {useDispatch} from 'react-redux';
-import {createBlog} from '../../redux/actions/blogs';
+import {getBlog} from '../../redux/actions/blogs';
+
+import {useDispatch,useSelector} from 'react-redux';
+import {createBlog,UpdateBlog} from '../../redux/actions/blogs';
 
 import '../../css/blog.css';
 
-const Blog = () => {
-    const [title, setTitle] = useState();
-    const [content, setContent] = useState();
+const Blog = (props) => {
+    var blogid = props.location.state.blog_id;
+    // getting the data from backend
+    const blog = useSelector( state => state.blogReducer.blogDetail);
+
+    const [title, setTitle] = useState(blog.title);
+    const [content, setContent] = useState(blog.content);
 
     const dispatch = useDispatch();
 
+    useEffect( () => {
+        if (blogid != undefined){
+            dispatch(getBlog(blogid));
+        }
+        setTitle(blog.title);
+        setContent(blog.content);
+    },[]);
+
     const handleBlogSubmit = (e) => {
         e.preventDefault();  
-        const token = localStorage.getItem('jwtToken');
+        
         const data = {
             "title": title,
             "content": content,
             "likes": 0
         };
 
-        dispatch(createBlog(data,token));
-};
+        dispatch(createBlog(data));
+    };
 
+    const handleUpdateBlog = (e) => {
+        e.preventDefault();
+        const data = {
+            "title": title,
+            "content": content,
+        };
+        dispatch(UpdateBlog(blogid,data));
+    }
+console.log("Checking Bloga:- ",blog);
+console.log("Checking Blog Detail:- ",title);
     return (
         <div>
             <h3 className='blog-head'>New Blog</h3>
@@ -36,6 +60,7 @@ const Blog = () => {
                     <FormControl
                     aria-label="Default"
                     aria-describedby="inputGroup-sizing-default"
+                    value = {title}
                     onChange={ (e) => setTitle(e.target.value)}
                     />
                 </InputGroup>
@@ -47,12 +72,17 @@ const Blog = () => {
                     <FormControl 
                     as="textarea" 
                     aria-label="With textarea" 
+                    value = {content}
                     onChange={ (e) => setContent(e.target.value)} />
                 </InputGroup><br />
 
-                <Button variant="primary" type="submit" onClick={handleBlogSubmit}>
+                { blogid==undefined && <Button variant="primary" type="submit" onClick={handleBlogSubmit}>
                         Post Blog
-                    </Button>
+                </Button> }
+
+                { blogid!=undefined && <Button variant="primary" type="submit" onClick={handleUpdateBlog}>
+                    Update Blog
+                </Button> }
             </div>
         </div>
     );

@@ -34,6 +34,7 @@ const Detail = () => {
     var isliked = vote.some( vt => vt.user_id === data.id);
     // for changing state and updating component only
     const [profileNav, setProfileNav] = useState(false);
+    const [editNav, setEditNav] = useState(false);
     // storing blog and author id to pass as props in Redirect component
     const [author,setAuthor] = useState();
 
@@ -74,6 +75,7 @@ const Detail = () => {
 
     const handleEdit = (e) => {
         e.preventDefault();
+        setEditNav(true);
         console.log("Editing");
     }
 
@@ -87,6 +89,15 @@ const Detail = () => {
     if(profileNav){
         return < Redirect to ={ {
             pathname: `/profile/${author}`
+          }} 
+          />;
+    }
+
+    // if user clicked on edit button then redirecting to new-blog component and passing blog_id as prop
+    if(editNav){
+        return < Redirect to ={ {
+            pathname: "/new-blog",
+            state: { blog_id: blogid }
           }} 
           />;
     }

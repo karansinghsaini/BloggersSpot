@@ -25,9 +25,9 @@ export function setBlogID (id) {
 }
 
 // creating a new blog here
-export function createBlog (data,token) {
+export function createBlog (data) {
     return function (dispatch) {
-        axios.post('/blogs/newblog', data, { headers: { 'authorization': `Bearer ${token}` }})
+        axios.post('/blogs/newblog', data)
         .then( (res) => {
             dispatch(newBlog(res.data));
             window.location.href = '/home';
@@ -72,6 +72,19 @@ export function DeleteBlog(id){
         axios.delete(`/blogs/deleteBlogs/${id}`)
         .then ( data => {
             dispatch({type: 'BLOGDELETED', payload: data});
+        });
+    }
+}
+
+export function UpdateBlog(id,data){
+    return dispatch => {
+        axios.put(`/blogs/updateBlogs/${id}`,data)
+        .then( (res) => {
+            dispatch(newBlog(res.data));
+            window.location.href = `/blog-detail/${id}`;
+        })
+        .catch(function (error) {
+            console.log(error);
         });
     }
 }
