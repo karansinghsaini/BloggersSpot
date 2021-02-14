@@ -125,7 +125,7 @@ const Detail = () => {
                     {/* { (data.id === blog.user_id) && <FaEdit className='blog-detail-edit edit' onClick={ (e) => handleEdit(e)}/>}
                     { (data.id === blog.user_id) && <MdDelete className='blog-detail-icon delete' onClick={handleDelete}/>} */}
 
-                    <Dropdown size="sm" className='dropdown'>
+                    <Dropdown size="sm" className='blog_dropdown'>
                         <Dropdown.Toggle variant="secondary">
                             
                         </Dropdown.Toggle>
