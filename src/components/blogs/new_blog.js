@@ -1,6 +1,8 @@
 import React, {useState,useEffect} from 'react';
 import {InputGroup, FormControl, Button} from 'react-bootstrap';
-import { InputTextarea } from 'primereact/inputtextarea';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
 import {getBlog} from '../../redux/actions/blogs';
 
 import {useDispatch,useSelector} from 'react-redux';
@@ -69,13 +71,19 @@ const Blog = (props) => {
                     <InputGroup.Prepend>
                     <InputGroup.Text>Blog Content</InputGroup.Text>
                     </InputGroup.Prepend>
-                    <InputTextarea 
+                    {/* <InputTextarea 
                         className="p-inputtext-sm" 
                         rows={5} 
                         cols={55} 
                         value={content} 
                         onChange={ (e) => setContent(e.target.value)}
-                         />
+                         /> */}
+
+                    <CKEditor
+                        data = {content}
+                        editor={ ClassicEditor }
+                        onChange={ (e,editor) => setContent(editor.getData())}
+                    />
                 </InputGroup><br />
 
                 

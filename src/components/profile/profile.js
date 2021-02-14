@@ -11,7 +11,7 @@ import defimg from '../../images/default.png';
 import {addVote,removeVote} from '../../redux/actions/votes';
 import {GetUserProfile} from '../../redux/actions/user';
 import {GetUserBlogs} from '../../redux/actions/blogs';
-
+import ReactHtmlParser from 'react-html-parser';
 import { FaHeart } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
 
@@ -88,7 +88,7 @@ const Profile = () => {
                 <Card.Body>
                 <Card.Title className='card-title-home' onClick={(e) => handleClick(details._id,e)}>{details.title}</Card.Title>
                 <Card.Text className='card-text'>
-                {details.content}
+                {ReactHtmlParser(details.content)}
                 </Card.Text>
                 </Card.Body>
                 <Card.Footer >
