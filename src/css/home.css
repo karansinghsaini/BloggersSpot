@@ -11,8 +11,8 @@
     cursor: pointer;
 }
 
-.blog-detail-edit{
-    cursor: pointer;
+.delete{
+    margin-left: 90%;
 }
 
 /* for mobile phones */
@@ -23,14 +23,6 @@
 .blogs-detail{
     margin: 40px auto;
 }
-
-  
-.blog_dropdown {
-    margin-left: 70%;
-    position: relative;
-    display: inline-block;
-}
-  
 
 /* for desktop */
 @media only screen and (min-width: 800px){
@@ -43,12 +35,6 @@
         width: 50%;
         margin: 40px auto;
     }
-
-    .blog_dropdown {
-        margin-left: 85%;
-        position: relative;
-        display: inline-block;
-    }
 }
 
 /* for tabs */
@@ -60,11 +46,5 @@
     
     .blogs-detail{
         margin: 40px auto;
-    }
-
-    .blog_dropdown {
-        margin-left: 80%;
-        position: relative;
-        display: inline-block;
     }
 }

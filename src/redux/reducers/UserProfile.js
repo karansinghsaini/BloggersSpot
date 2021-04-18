@@ -22,6 +22,12 @@ export const UserProfile = (state = myState, action) => {
         case "PROFILEPHOTO":
             return Object.assign({}, state, {curr_user_data: action.payload.data});
 
+        case "Follow":
+            return state;
+
+        case "UNFOLLOW":
+            return state;
+
         default:
             return state;
 

@@ -19,7 +19,9 @@ route.post('/createUser',async (req,res) => {
           var userModel = new users({
             'username': req.body.username,
             'email': req.body.email,
-            'password': hash
+            'password': hash,
+            'followers': [],
+            'following': []
           });
             userModel.save((err,user) => {
                 if (err) return res.json({

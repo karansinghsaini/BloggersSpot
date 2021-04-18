@@ -11,6 +11,7 @@ import defimg from '../../images/default.png';
 import {addVote,removeVote} from '../../redux/actions/votes';
 import {GetUserProfile} from '../../redux/actions/user';
 import {GetUserBlogs} from '../../redux/actions/blogs';
+import {FollowUser,UnFollowUser} from '../../redux/actions/profile';
 import ReactHtmlParser from 'react-html-parser';
 import { FaHeart } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
@@ -36,7 +37,7 @@ const Profile = () => {
     useEffect( () => {
         dispatch(GetUserProfile(userid));
         dispatch(GetUserBlogs(userid));
-    },[votes,user_data]);
+    },[]);
 
     const handleUploadPhoto = (e,id) =>{
         if(data.id === user_data._id){
@@ -66,6 +67,30 @@ const Profile = () => {
         setNavigate(true);
     }
 
+    // for follow
+    const handleFollow = (login_user_id,followed_user_id,login_name,follow_name,e) => {
+        const follow_data = {
+            follower_id: login_user_id,
+            follower_name: login_name,
+            follow_id: followed_user_id,
+            follow_name: follow_name
+        }
+        dispatch(FollowUser(login_user_id,followed_user_id,follow_data));
+        dispatch(GetUserProfile(userid));
+    }
+
+    // for UnFollow
+    const handleUnFollow = (login_user_id,followed_user_id,login_name,follow_name,e) => {
+        const follow_data = {
+            follower_id: login_user_id,
+            follower_name: login_name,
+            follow_id: followed_user_id,
+            follow_name: follow_name
+        }
+        dispatch(UnFollowUser(login_user_id,followed_user_id,follow_data));
+        dispatch(GetUserProfile(userid));
+    }
+
     if(blognavigate){
         return < Redirect to ={ {
             pathname: `/blog-detail/${blogid}`
@@ -76,7 +101,6 @@ const Profile = () => {
     if(navigate){
         return <Redirect to='/update-profile' push={true} />
     }
-
 
     var blogList = user_blogs.map( (details) => {
         var vote = votes.filter( vote => vote.blog_id === details._id);
@@ -122,6 +146,16 @@ const Profile = () => {
                 { (user_data.bio !== undefined && user_data.bio !== null) && <h4>Bio</h4> }
                 <p>{user_data.bio}</p> 
                 { (data.id === user_data._id) && <Button variant="secondary" size="sm" onClick={handleUpdate} >Update profile</Button>}
+                
+                <div>
+                    { user_data.followers !== undefined && <p>Followers:- {user_data.followers.length}</p> }
+                    { user_data.following !== undefined && <p>Following:- {user_data.following.length}</p> }
+                    {  (( data.id !== user_data._id && user_data.followers !== undefined ) && !user_data.followers.find(obj => obj.user_id === data.id)) && 
+                        <Button variant="info" onClick = { (e) => handleFollow(data.id,user_data._id,data.username,user_data.username,e,)}>Follow</Button>}
+                    {  (( data.id !== user_data._id && user_data.followers !== undefined ) && user_data.followers.find(obj => obj.user_id === data.id)) && 
+                    <Button variant="info" onClick = { (e) => handleUnFollow(data.id,user_data._id,data.username,user_data.username,e,)}>UnFollow</Button>}
+                </div>
+                
             </div><br />
 
             <div className='profile-center-div'>

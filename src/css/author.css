@@ -13,24 +13,6 @@
     cursor: pointer;
 }
 
-.author-bio{
-    font-size: medium;
-    font-family: cursive;
-    font-style: italic;
-}
-
-.flex-container {
-    display: flex;
-    background-color: DodgerBlue;
-  }
-  
-  .flex-container > div {
-    background-color: #f1f1f1;
-    margin: 10px;
-    padding: 20px;
-    font-size: 30px;
-  }
-
 @media only screen and (min-width: 800px){
     .author-img{
         height: 100px;
@@ -39,10 +21,6 @@
 
     .author-name{
         font-size: larger;
-    }
-
-    .author-bio{
-        font-size: medium;
     }
 }
 
@@ -54,9 +32,5 @@
 
     .author-name{
         font-size: large;
-    }
-
-    .author-bio{
-        font-size: medium;
     }
 }

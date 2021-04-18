@@ -35,7 +35,19 @@ const userSchema = new mongoose.Schema({
     },
     image: {
         type: String
-    }
+    },
+    followers: [
+        {
+            user_id: String,
+            name: String
+        }
+    ],
+    following: [
+        {
+            user_id: String,
+            name: String
+        }
+    ]
 });
 
 module.exports = mongoose.model('users', userSchema);

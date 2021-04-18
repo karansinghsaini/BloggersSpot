@@ -2,6 +2,7 @@ const express = require('express');
 const users = require('../models/user');
 const blogs = require('../models/blogs');
 const votes = require('../models/votes');
+const async = require('async');
 //var _ = require('lodash');
 // module for creating JWT tokens.
 var jwt = require('jsonwebtoken');
@@ -153,5 +154,79 @@ route.get('/userblogs/:id',verifyToken, (req,res) => {
     });
 });
 
+// Adding a new follower
+route.put('/:login_user_id/follow/:profile_user_id', verifyToken, (req,res)=>{
+    jwt.verify(req.token, process.env.Secret, (err, authData) => {
+        if(err) {
+          res.sendStatus(403);
+        } else {
+            async.parallel([
+                function addFollower() {
+                    const followers = {
+                        "user_id": req.params.login_user_id,
+                        "name": req.body.follower_name
+                    }
+                    users.findByIdAndUpdate({ _id: req.params.profile_user_id, }, {$push: {followers: followers }}, err => {
+                        if (err) return res.json({
+                            success: false,
+                            error: err
+                        });
+                    });
+                    
+                },
+
+                function addFollowing(){
+                    const following = {
+                        "user_id": req.params.profile_user_id,
+                        "name": req.body.follow_name
+                    }
+                    users.findByIdAndUpdate({ _id: req.params.login_user_id }, {$push: { following : following}}, err => {
+                        if (err) return res.json({
+                            success: false,
+                            error: err
+                        });
+                    });
+                }
+            ]);   
+        }
+    });
+});
+
+
+// Removing a follower
+route.put('/:login_user_id/unfollow/:profile_user_id', verifyToken, (req,res)=>{
+    jwt.verify(req.token, process.env.Secret, (err, authData) => {
+        if(err) {
+          res.sendStatus(403);
+        } else {
+            async.parallel([
+                function removeFollower() {
+                    var followers = {
+                        "user_id": req.body.follower_id
+                    }
+                    users.findByIdAndUpdate({ _id: req.body.follow_id }, {$pull: {followers: followers }}, err => {
+                        if (err) return res.json({
+                            success: false,
+                            error: err
+                        });
+                    });
+                    
+                },
+
+                function removeFollowing(){
+                    var following = {
+                        "user_id": req.body.follow_id
+                    }
+                    users.findByIdAndUpdate({ _id: req.body.follower_id }, {$pull: { following : following}}, err => {
+                        if (err) return res.json({
+                            success: false,
+                            error: err
+                        });
+                    });
+                }
+            ]);   
+        }
+    });
+});
 
 module.exports = route;

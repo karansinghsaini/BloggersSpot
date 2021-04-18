@@ -67,10 +67,9 @@ const Blog = (props) => {
                     />
                 </InputGroup>
                 
-                <InputGroup>
-                    <InputGroup.Prepend>
+            
                     <InputGroup.Text>Blog Content</InputGroup.Text>
-                    </InputGroup.Prepend>
+                
                     {/* <InputTextarea 
                         className="p-inputtext-sm" 
                         rows={5} 
@@ -83,16 +82,15 @@ const Blog = (props) => {
                         data = {content}
                         editor={ ClassicEditor }
                         onChange={ (e,editor) => setContent(editor.getData())}
-                    />
-                </InputGroup><br />
+                    /><br />
 
                 
 
-                { blogid==undefined && <Button variant="primary" type="submit" onClick={handleBlogSubmit}>
+                { blogid===undefined && <Button variant="primary" type="submit" onClick={handleBlogSubmit}>
                         Post Blog
                 </Button> }
 
-                { blogid!=undefined && <Button variant="primary" type="submit" onClick={handleUpdateBlog}>
+                { blogid!==undefined && <Button variant="primary" type="submit" onClick={handleUpdateBlog}>
                     Update Blog
                 </Button> }
             </div>

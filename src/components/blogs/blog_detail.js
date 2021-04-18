@@ -1,8 +1,8 @@
 import React, {useEffect,useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {Redirect, useParams} from 'react-router-dom';
-import ReactHtmlParser from 'react-html-parser';
-import {Card, Dropdown} from 'react-bootstrap';
+
+import {Card} from 'react-bootstrap';
 import jwt from 'jsonwebtoken';
 // importing comments component
 import Comments from './comments';
@@ -14,9 +14,6 @@ import {getComments} from '../../redux/actions/comments';
 import { FaHeart } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
-import { FaEdit } from "react-icons/fa";
-import { FaEllipsisV } from "react-icons/fa";
-import { FaShareSquare } from "react-icons/fa";
 
 import '../../css/home.css';
 
@@ -34,7 +31,6 @@ const Detail = () => {
     var isliked = vote.some( vt => vt.user_id === data.id);
     // for changing state and updating component only
     const [profileNav, setProfileNav] = useState(false);
-    const [editNav, setEditNav] = useState(false);
     // storing blog and author id to pass as props in Redirect component
     const [author,setAuthor] = useState();
 
@@ -51,7 +47,7 @@ const Detail = () => {
     useEffect( () => {
         dispatch(getBlog(blogid));
         dispatch(getComments(blogid));
-    }, [isliked]);
+    }, []);
 
     const handleDelete = () => {
         if(window.confirm('Are you sure you want to delete this blog?')){
@@ -73,12 +69,6 @@ const Detail = () => {
         dispatch(getBlog(blogid));
     };
 
-    const handleEdit = (e) => {
-        e.preventDefault();
-        setEditNav(true);
-        console.log("Editing");
-    }
-
     const handleProfileClick = (id,e) => {
         setAuthor(id)
         //localStorage.setItem('userid', id);
@@ -92,51 +82,23 @@ const Detail = () => {
           }} 
           />;
     }
-
-    // if user clicked on edit button then redirecting to new-blog component and passing blog_id as prop
-    if(editNav){
-        return < Redirect to ={ {
-            pathname: "/new-blog",
-            state: { blog_id: blogid }
-          }} 
-          />;
-    }
+console.log(blogid);
 
     return (
         <div className='blogs-detail'>
             <Card className="text-center blog-card" key={blog._id} bg='info'>
-                <Card.Header className='card-title-home'>
-                    <div>
-                    <span onClick={(e) => handleProfileClick(blog.user_id,e)}>@{blog.author}</span>
-
-                    </div>
-
-                </Card.Header>
+                <Card.Header className='card-title-home' onClick={(e) => handleProfileClick(blog.user_id,e)}>@{blog.author}</Card.Header>
                 <Card.Body>
                 <Card.Title>{blog.title}</Card.Title>
                 <Card.Text className='card-text'>
-                {ReactHtmlParser(blog.content)}
+                {blog.content}
                 </Card.Text>
                 </Card.Body>
                 <Card.Footer style={{ textAlign: 'left' }}>
                     { !isliked && <FaRegHeart className='blog-detail-icon'  onClick={handleVote} />}&nbsp;
                     { isliked && <FaHeart className='blog-detail-icon' onClick={handleUnvote} />}&nbsp;
-                    <span>{vote.length}</span>&nbsp;
-                    {/* { (data.id === blog.user_id) && <FaEdit className='blog-detail-edit edit' onClick={ (e) => handleEdit(e)}/>}
-                    { (data.id === blog.user_id) && <MdDelete className='blog-detail-icon delete' onClick={handleDelete}/>} */}
-
-                    <Dropdown size="sm" className='blog_dropdown'>
-                        <Dropdown.Toggle variant="secondary">
-                            
-                        </Dropdown.Toggle>
-
-                        <Dropdown.Menu>
-                            { (data.id === blog.user_id) && <Dropdown.Item onClick={ (e) => handleEdit(e)}><FaEdit className='blog-detail-edit' />&nbsp; Edit</Dropdown.Item>}
-                            { (data.id === blog.user_id) && <Dropdown.Item onClick={handleDelete}><MdDelete className='blog-detail-edit' />&nbsp; Delete</Dropdown.Item>}
-                            <Dropdown.Item ><FaShareSquare/>&nbsp;Share</Dropdown.Item>
-                        </Dropdown.Menu>
-                    </Dropdown>
-
+                    <span>{vote.length}</span>
+                    { (data.id === blog.user_id) && <MdDelete className='blog-detail-icon delete' onClick={handleDelete}/>}
                 </Card.Footer>
             </Card><br/>
 

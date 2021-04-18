@@ -36,3 +36,23 @@ export function UpdateProfilePhoto(id,data){
         });
     };
 }
+
+//for Follow
+export function FollowUser(login_user_id,profile_user_id,data){
+    return dispatch => {
+        axios.put(`/profile/${login_user_id}/follow/${profile_user_id}`, data)
+        .then( res => {
+            dispatch({type:'FOLLOW', payload:res});
+        });
+    };
+}
+
+// for UnFollow
+export function UnFollowUser(login_user_id,profile_user_id,data){
+    return dispatch => {
+        axios.put(`/profile/${login_user_id}/unfollow/${profile_user_id}`, data)
+        .then( res => {
+            dispatch({type:'UNFOLLOW', payload:res});
+        });
+    };
+}

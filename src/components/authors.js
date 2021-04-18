@@ -34,8 +34,7 @@ const Authors = () => {
 
     const userList = users.map( user => {
         return(
-            <div key={user._id} classname='flex-container'>
-                <div>
+            <div key={user._id} classname='div-list-container'>
                 { user.image === undefined && 
                     <Image className='author-img' src={defimg} roundedCircle 
                     onClick={(e) =>handleProfileClick(user._id)}
@@ -44,11 +43,7 @@ const Authors = () => {
                      <Image className='author-img' src={user.image} roundedCircle 
                      onClick={(e) => handleProfileClick(user._id)} 
                 />  } 
-                </div>
-                <div>
                 <h4 className='author-name' onClick= { (e) => handleProfileClick(user._id)}>{user.username}</h4><br />
-                <p className='author-bio'>{user.bio}</p>
-                </div>
             </div>
         );
     });
