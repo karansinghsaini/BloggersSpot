@@ -56,3 +56,12 @@ export function UnFollowUser(login_user_id,profile_user_id,data){
         });
     };
 }
+
+export function DeleteUser(id){
+    return dispatch => {
+        axios.delete(`/user/deleteUser/${id}`)
+        .then( res => {
+            dispatch({type: 'DELETEUSER', payload: res});
+        });
+    };
+}

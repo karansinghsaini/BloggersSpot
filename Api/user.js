@@ -1,6 +1,9 @@
 const express = require('express');
 const users = require('../models/user');
+const comments = require('../models/comments');
 var _ = require('lodash');
+const async = require('async');
+const blogs = require('../models/blogs');
 //module to encrypt passwords.
 var bcrypt = require('bcryptjs');
 // module for creating JWT tokens.
@@ -101,11 +104,35 @@ route.delete('/deleteUser/:id', verifyToken, function (req, res) {
         if(err) {
           res.sendStatus(403);
         } else {
-            users.findByIdAndRemove({
-                "_id": req.params.id
-            }).then(function (user) {
-                res.send(user);
+            async.parallel([
+             function removeUser(done){
+                    users.findByIdAndRemove({
+                    "_id": req.params.id
+                }).then(function (user) {
+                    res.send(user);
+                });
+            },
+            function removeBlogs(done){
+                blogs.deleteMany({ user_id: req.params.id}, err => {
+                    if (err) {
+                        return res.json({
+                        success: false,
+                        error: err
+                        });
+                }
             });
+            },
+            function removeComments(done){
+                comments.deleteMany({ user_id: req.params.id}, err => {
+                    if (err) {
+                        return res.json({
+                        success: false,
+                        error: err
+                        });
+                    }
+                });
+            }
+        ]);
         }
     });
 });   

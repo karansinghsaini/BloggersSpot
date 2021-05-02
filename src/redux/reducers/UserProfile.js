@@ -28,6 +28,10 @@ export const UserProfile = (state = myState, action) => {
         case "UNFOLLOW":
             return state;
 
+        case "DELETEUSER":
+            alert("User deleted successfully");
+            return state;
+
         default:
             return state;
 

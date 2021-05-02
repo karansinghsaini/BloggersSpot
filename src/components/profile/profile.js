@@ -11,7 +11,7 @@ import defimg from '../../images/default.png';
 import {addVote,removeVote} from '../../redux/actions/votes';
 import {GetUserProfile} from '../../redux/actions/user';
 import {GetUserBlogs} from '../../redux/actions/blogs';
-import {FollowUser,UnFollowUser} from '../../redux/actions/profile';
+import {FollowUser,UnFollowUser,DeleteUser} from '../../redux/actions/profile';
 import ReactHtmlParser from 'react-html-parser';
 import { FaHeart } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
@@ -65,6 +65,14 @@ const Profile = () => {
     const handleUpdate = () => {
         dispatch(GetUserProfile(userid));
         setNavigate(true);
+    }
+
+    const deleteUser = () => {
+        if(window.confirm('Are you sure you want to delete your account?')){
+            dispatch(DeleteUser(userid));
+            localStorage.clear('jwtToken');
+            window.location.href = '/register';
+        }
     }
 
     // for follow
@@ -146,7 +154,7 @@ const Profile = () => {
                 { (user_data.bio !== undefined && user_data.bio !== null) && <h4>Bio</h4> }
                 <p>{user_data.bio}</p> 
                 { (data.id === user_data._id) && <Button variant="secondary" size="sm" onClick={handleUpdate} >Update profile</Button>}
-                
+                { (data.id === user_data._id) && <Button variant="danger" size="sm" onClick={deleteUser} >Delete profile</Button>}
                 <div>
                     { user_data.followers !== undefined && <p>Followers:- {user_data.followers.length}</p> }
                     { user_data.following !== undefined && <p>Following:- {user_data.following.length}</p> }

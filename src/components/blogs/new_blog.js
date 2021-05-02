@@ -21,7 +21,7 @@ const Blog = (props) => {
     const dispatch = useDispatch();
 
     useEffect( () => {
-        if ( props.location.state!= undefined){
+        if ( props.location.state!== undefined){
             blogid  = props.location.state.blog_id;
             dispatch(getBlog(blogid));
         }

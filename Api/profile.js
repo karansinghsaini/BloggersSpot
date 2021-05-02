@@ -166,7 +166,7 @@ route.put('/:login_user_id/follow/:profile_user_id', verifyToken, (req,res)=>{
                         "user_id": req.params.login_user_id,
                         "name": req.body.follower_name
                     }
-                    users.findByIdAndUpdate({ _id: req.params.profile_user_id, }, {$push: {followers: followers }}, err => {
+                    users.findByIdAndUpdate({ _id: req.params.profile_user_id }, {$push: {followers: followers }}, err => {
                         if (err) return res.json({
                             success: false,
                             error: err
