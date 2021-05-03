@@ -1,7 +1,7 @@
 import React, {useEffect,useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {Redirect, useParams} from 'react-router-dom';
-
+import ReactHtmlParser from 'react-html-parser';
 import {Card} from 'react-bootstrap';
 import jwt from 'jsonwebtoken';
 // importing comments component
@@ -91,7 +91,7 @@ console.log(blogid);
                 <Card.Body>
                 <Card.Title>{blog.title}</Card.Title>
                 <Card.Text className='card-text'>
-                {blog.content}
+                {ReactHtmlParser( blog.content )}
                 </Card.Text>
                 </Card.Body>
                 <Card.Footer style={{ textAlign: 'left' }}>

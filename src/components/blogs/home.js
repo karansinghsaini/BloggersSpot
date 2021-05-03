@@ -4,7 +4,7 @@ import {Card} from 'react-bootstrap';
 import {Redirect} from 'react-router-dom';
 import {getBlogs} from '../../redux/actions/blogs';
 import {addVote,removeVote} from '../../redux/actions/votes';
-
+import ReactHtmlParser from 'react-html-parser';
 import { FaHeart } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
 import jwt from 'jsonwebtoken';
@@ -82,7 +82,7 @@ const Home = () => {
                 <Card.Body>
                 <Card.Title className='card-title-home' onClick={(e) => handleBlogClick(details._id,e)}>{details.title}</Card.Title>
                 <Card.Text className='card-text'>
-                {details.content}
+                {ReactHtmlParser( details.content )}
                 </Card.Text>
                 </Card.Body>
                 <Card.Footer >
