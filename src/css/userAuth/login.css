@@ -8,7 +8,6 @@
 
 .login-head{
     padding-top: 40px;
-    font-style: oblique;
     font-family: 'Lucida Sans';
     font-weight: lighter;
     color: white;
@@ -16,6 +15,7 @@
 
 .login-form-text{
     color: white;
+    text-align: left;
     /* font-weight: 500; */
 }
 
@@ -23,6 +23,11 @@
 .login-container{
     width: 70%; 
     margin: 20px auto;
+    text-align: left;
+}
+
+.login-button{
+    margin-left: 35%;
 }
 
 .login-box{

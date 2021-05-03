@@ -42,7 +42,7 @@ const Login = () => {
                         required="true"/>
                     </Form.Group>
                     
-                    <Button variant="primary" type="submit">
+                    <Button variant="primary" type="submit" className='login-button'>
                         Log In
                     </Button><br/><br/>
 
@@ -50,7 +50,7 @@ const Login = () => {
                         <Form.Text className='login-form-text'>
                             If not registered then click below to register
                         </Form.Text>
-                        <a href='/register'>Register here</a>
+                        <a href='/register' className='login-button'>Register here</a>
                     </Form.Group>
                 </Form>
             </div>
