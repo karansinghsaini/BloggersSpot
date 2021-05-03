@@ -11,7 +11,7 @@ I have used Reactjs for frontend development. I have used the following librarie
 4. Hooks - for stateful functions
 
 ### Nodejs
-I have sued Nodejs for backend development. I have used the following libraries:- 
+I have used Nodejs for backend development. I have used the following libraries:- 
 
 1. bcryptjs - to encrypt and decrypt the passwords
 2. jsonwebtoken - to create and verify tokens to authenticate the user
