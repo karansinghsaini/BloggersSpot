@@ -1,6 +1,6 @@
 .login-div-style{
     height: 610px;
-    background-image: url('../../images/login.jpg');
+    background-image: url('../../images/register.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: 100% 100%;
@@ -8,8 +8,9 @@
 
 .login-head{
     padding-top: 40px;
-    font-family: 'Lucida Sans';
+    font-family: sans-serif;
     font-weight: lighter;
+    font-variant: small-caps;
     color: white;
 }
 
@@ -36,6 +37,8 @@
     margin: 60px auto;
     box-shadow: 10px 15px 8px 0 rgba(0, 0, 0, 0.2), 0 15px 20px 0 rgba(0, 0, 0, 0.19);
     box-sizing: border-box;  
+    background-color: rgba(99, 99, 99, 0.8); 
+    border-radius: 20px;
 }
 
 

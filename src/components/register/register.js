@@ -87,7 +87,7 @@ const Register = () => {
                         />
                     </Form.Group>
                     
-                    <Button variant="primary" type="submit" className='register-form-text'>
+                    <Button variant="primary" type="submit" className='register-form-text register-button'>
                         Register
                     </Button><br /><br />
 
@@ -95,7 +95,7 @@ const Register = () => {
                         <Form.Text className='register-form-text'>
                             If already a user then click below to sign in
                         </Form.Text>
-                        <a href='/login'>SignIn</a>
+                        <a href='/login' className='register-button'>SignIn</a>
                     </Form.Group>
                 </Form>
             </div>

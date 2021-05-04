@@ -10,6 +10,13 @@ const Menu = () => {
     // decoding the token to get logged in user data
     const data = jwt.decode(localStorage.jwtToken);
 
+    const handleLogout = (e) => {
+        if(window.confirm('Are you sure you want to LogOut?')){
+            localStorage.clear('jwtToken');
+            window.location.href = '/login';
+        }
+    }
+
     return(
         <>
             <Navbar sticky="top" bg="light" variant="light" expand="lg">
@@ -25,7 +32,7 @@ const Menu = () => {
                     {/* <NavDropdown.Item href="/settings">Settings</NavDropdown.Item>
                     <NavDropdown.Item href="#">Something</NavDropdown.Item> */}
                     <NavDropdown.Divider />
-                    <NavDropdown.Item href="/logout">LogOut</NavDropdown.Item>
+                    <NavDropdown.Item onClick={e => handleLogout(e)}>LogOut</NavDropdown.Item>
                 </NavDropdown>}
                 </Nav>
 

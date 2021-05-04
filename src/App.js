@@ -25,8 +25,8 @@ const App = () => {
   // }
   return(
       <div className="App">
-          <BrowserRouter>
           <Menu />
+          <BrowserRouter>
                   <Switch>
                       { !check && <Route exact path='/' component={Register} /> }
                       { check && <Route exact path='/' component={Home} /> }
