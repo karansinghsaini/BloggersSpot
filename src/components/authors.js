@@ -81,13 +81,13 @@ const Authors = () => {
                     <div className='authors_buttons_container'>
                     {  (( data.id !== user._id && user.followers !== undefined ) && !user.followers.find(obj => obj.user_id === data.id)) && 
                             // <Button variant="outline-info" className='authors-buttons' onClick = { (e) => handleFollow(data.id,user._id,data.username,user.username,e,)}>Follow</Button>}
-                            <button type="button" class="authors-buttons">
+                            <button type="button" class="authors-buttons" onClick = { (e) => handleFollow(data.id,user._id,data.username,user.username,e,)}>
                                 <span>Follow</span>
                             </button>
                         }
                         {  (( data.id !== user._id && user.followers !== undefined ) && user.followers.find(obj => obj.user_id === data.id)) && 
                         // <Button variant="outline-info" className='authors-buttons' onClick = { (e) => handleUnFollow(data.id,user._id,data.username,user.username,e,)}>UnFollow</Button>}
-                            <button type="button" class="authors-buttons">
+                            <button type="button" class="authors-buttons" onClick = { (e) => handleUnFollow(data.id,user._id,data.username,user.username,e,)}>
                                 <span>UnFollow</span>
                             </button>
                         }
