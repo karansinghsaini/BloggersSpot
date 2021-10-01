@@ -42,7 +42,7 @@ const Home = () => {
 
     useEffect (() => {
         dispatch(getBlogs());        
-    }, [votes]);
+    }, []);
 
     const handleBlogClick = (id,e) => {
         setBlogId(id);
@@ -98,7 +98,7 @@ const Home = () => {
 
     return(
         <div>
-            <h3>Welcome To Blogs</h3>
+            <h3 className='home_head'>Welcome To Blogs</h3>
             <div className='blogs-list'>
                 {blogList}
             </div>

@@ -51,8 +51,9 @@ const Blog = (props) => {
     }
 
     return (
-        <div>
+        <div className='newblog_main'>
             <h3 className='blog-head'>New Blog</h3>
+            <div className='blog_box'>
             <div className='blog-container'>
 
                 <InputGroup className="mb-3">
@@ -93,6 +94,7 @@ const Blog = (props) => {
                 { blogid!==undefined && <Button variant="primary" type="submit" onClick={handleUpdateBlog}>
                     Update Blog
                 </Button> }
+            </div>
             </div>
         </div>
     );

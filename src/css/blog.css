@@ -1,15 +1,33 @@
 .blog-head{
     padding-top: 30px;
-    font-style: oblique;
-    font-family: 'Lucida Sans';
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: lighter;
+    color: black;
 }
 
 /* for mobile phones */
-.blog-container{ 
-    width: 80%;
-    margin: 50px auto;
+/* .blog-container{ 
+    width: 100%;
+    
 }
+
+.blog_box{
+    border-style: groove;
+    width: 80%;
+    margin: 60px auto;
+    box-shadow: 10px 15px 8px 0 rgba(0, 0, 0, 0.2), 0 15px 20px 0 rgba(0, 0, 0, 0.19);
+    box-sizing: border-box;  
+    background-color: rgba(99, 99, 99, 0.8); 
+    border-radius: 20px;
+} */
+
+/* .newblog_main{
+    height: 605px;
+    background-image: url('../images/new_blog.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+} */
 
 @media only screen and (min-width: 768px){
     .blog-container{
