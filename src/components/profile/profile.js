@@ -134,54 +134,6 @@ const Profile = () => {
         )
 });
 
-    // return(
-    //     <div>
-    //         <div >
-    //             {/* User Profile picture */}
-    //             { user_data.image === undefined && 
-    //                 <Image className='profile-img' src={defimg} roundedCircle 
-    //                 onClick={(e) => handleUploadPhoto(e)}
-    //             />  }   <br/><br/>
-    //             {  (user_data.image !== undefined && user_data.image !== null) &&
-    //                  <Image className='profile-img' src={user_data.image} roundedCircle 
-    //                  onClick={(e) => handleUploadPhoto(e)} 
-    //             />  }   <br/><br/>
-
-    //             {/* User Details */}
-    //             {(user_data.fullname !== undefined && user_data.fullname !== null) && <h6>Fullname:- {user_data.fullname}</h6>}
-    //             { (user_data.username !== undefined && user_data.username !== null) && <p> Username:- @{user_data.username}</p>}
-    //             { (user_data.phone !== undefined && user_data.phone !== null) && <p>Contact:- {user_data.phone}</p>}    
-    //             { (user_data.email !== undefined && user_data.email !== null) && <p>Email:- {user_data.email}</p>}<br/>
-    //             { (user_data.bio !== undefined && user_data.bio !== null) && <h4>Bio</h4> }
-    //             <p>{user_data.bio}</p> 
-    //             { (data.id === user_data._id) && <Button variant="secondary" size="sm" onClick={handleUpdate} >Update profile</Button>}
-    //             { (data.id === user_data._id) && <Button variant="danger" size="sm" onClick={deleteUser} >Delete profile</Button>}
-    //             <div>
-    //                 { user_data.followers !== undefined && <p>Followers:- {user_data.followers.length}</p> }
-    //                 { user_data.following !== undefined && <p>Following:- {user_data.following.length}</p> }
-    //                 {  (( data.id !== user_data._id && user_data.followers !== undefined ) && !user_data.followers.find(obj => obj.user_id === data.id)) && 
-    //                     <Button variant="info" onClick = { (e) => handleFollow(data.id,user_data._id,data.username,user_data.username,e,)}>Follow</Button>}
-    //                 {  (( data.id !== user_data._id && user_data.followers !== undefined ) && user_data.followers.find(obj => obj.user_id === data.id)) && 
-    //                 <Button variant="info" onClick = { (e) => handleUnFollow(data.id,user_data._id,data.username,user_data.username,e,)}>UnFollow</Button>}
-    //             </div>
-                
-    //         </div><br />
-
-    //         <div className='profile-center-div'>
-    //             <h4>Blogs</h4>
-    //             <br />{ user_blogs.length === 0 && <p className='no-blogs'>No Blogs yet</p> }
-    //             {blogList}
-    //         </div>
-
-    //         <MyVerticallyCenteredModal 
-    //             show={modalShow}
-    //             onHide={() => setModalShow(false)}
-    //             user_data={user_data}
-    //         />
-            
-    //     </div>
-    // );
-
     return(
         <Container>
             <Row>
