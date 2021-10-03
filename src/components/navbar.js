@@ -42,10 +42,10 @@ const Menu = () => {
                 </Nav>
     
                 
-                {isLoggedIn && <Form inline>
+                {/* {isLoggedIn && <Form inline>
                     <FormControl type="text" placeholder="Search Authors" className="mr-sm-2" />
                     <Button variant="outline-info">Search</Button>&nbsp;&nbsp;
-                </Form>}
+                </Form>} */}
              </Navbar.Collapse>
             </Navbar>
         </>
