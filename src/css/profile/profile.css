@@ -22,7 +22,7 @@
 }
 
 .profile_details{
-    align-content: center;
+    padding-right: auto;
 }
 
 .profile_bio{
@@ -41,6 +41,11 @@
 
 .follow_details{
     font-family: sans-serif;
+}
+
+.user_delete_icon{
+    padding-left: 5px;
+    cursor: pointer;
 }
 
 /* for desktop */
@@ -63,10 +68,6 @@
         height: 171px;
         cursor: pointer;
     }
-
-    .profile_details{
-        padding-right: 50%;
-    }
 }
 
 /* for tabs */
@@ -88,9 +89,5 @@
         width: 140px;
         height: 131px;
         cursor: pointer;
-    }
-
-    .profile_details{
-        padding-right: 30%;
     }
 }

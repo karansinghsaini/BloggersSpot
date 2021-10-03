@@ -116,7 +116,7 @@ const Profile = () => {
         var isliked = vote.some( vt => (vt.user_id === data.id));
         return(
             <div className='blog' key={details._id}>
-            <Card className="text-center blog-card" bg='info'>
+            <Card className="text-center blog-card" bg='light'>
                 <Card.Header>@{details.author}</Card.Header>
                 <Card.Body>
                 <Card.Title className='card-title-home' onClick={(e) => handleClick(details._id,e)}>{details.title}</Card.Title>
@@ -157,8 +157,8 @@ const Profile = () => {
                         <div className='profile_bio'>
                         { (user_data.username !== undefined && user_data.username !== null) && <span className = 'username'> {user_data.username}</span>}&nbsp;&nbsp;
 
-                        { (data.id === user_data._id) && <Button variant="secondary" size="sm" onClick={handleUpdate} >Update profile</Button>}
-                        { (data.id === user_data._id) && <Button variant="danger" size="sm" onClick={deleteUser} >Delete profile</Button>}
+                        { (data.id === user_data._id) && <Button variant="secondary" size="sm" onClick={handleUpdate} >Update</Button>}
+                        { (data.id === user_data._id) && <Button variant="danger" size="sm" onClick={deleteUser} >Delete</Button>}
 
                         {  (( data.id !== user_data._id && user_data.followers !== undefined ) && !user_data.followers.find(obj => obj.user_id === data.id)) && 
                                 <span><Button variant="info" onClick = { (e) => handleFollow(data.id,user_data._id,data.username,user_data.username,e,)}>Follow</Button></span>}
@@ -172,8 +172,8 @@ const Profile = () => {
                         </p>
                         {(user_data.fullname !== undefined && user_data.fullname !== null) && <h6 className='fullname'>{user_data.fullname}</h6>}
                         <p>{user_data.bio}</p> 
-                        { (user_data.phone !== undefined && user_data.phone !== null) && <span>Contact:- {user_data.phone}</span>}&nbsp;&nbsp; 
-                        { (user_data.email !== undefined && user_data.email !== null) && <span>Email:- {user_data.email}</span>}<br/>
+                        {/* { (user_data.phone !== undefined && user_data.phone !== null) && <span>Contact:- {user_data.phone}</span>}&nbsp;&nbsp; 
+                        { (user_data.email !== undefined && user_data.email !== null) && <span>Email:- {user_data.email}</span>}<br/> */}
                         </div>
                     </Col>
                     

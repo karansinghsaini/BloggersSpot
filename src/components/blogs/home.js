@@ -75,7 +75,7 @@ const Home = () => {
         var isliked = votes.some( vote => (vote.blog_id === details._id && vote.user_id === data.id));
         return(
             <div key={details._id}>
-            <Card className="text-center blog-card" bg='info'>
+            <Card className="text-center blog-card" bg='light'>
                 <Card.Header className='card-title-home' onClick={(e) => handleProfileClick(details.user_id,e)}>
                     @{details.author}
                 </Card.Header>
