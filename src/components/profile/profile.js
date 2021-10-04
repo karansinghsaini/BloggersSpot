@@ -157,7 +157,7 @@ const Profile = () => {
                         <div className='profile_bio'>
                         { (user_data.username !== undefined && user_data.username !== null) && <span className = 'username'> {user_data.username}</span>}&nbsp;&nbsp;
 
-                        { (data.id === user_data._id) && <Button variant="secondary" size="sm" onClick={handleUpdate} >Update</Button>}
+                        { (data.id === user_data._id) && <Button variant="secondary" size="sm" onClick={handleUpdate} >Edit</Button>}
                         { (data.id === user_data._id) && <Button variant="danger" size="sm" onClick={deleteUser} >Delete</Button>}
 
                         {  (( data.id !== user_data._id && user_data.followers !== undefined ) && !user_data.followers.find(obj => obj.user_id === data.id)) && 
@@ -178,7 +178,7 @@ const Profile = () => {
                     </Col>
                     
             
-            </Row>
+            </Row><br/><br/>
             
 
             <Row>
