@@ -86,22 +86,6 @@ console.log(blogid);
 
     return (
         <div className='blogs-detail'>
-            {/* <Card className="text-center blog-card" key={blog._id} bg='info'>
-                <Card.Header className='card-title-home' onClick={(e) => handleProfileClick(blog.user_id,e)}>@{blog.author}</Card.Header>
-                <Card.Body>
-                <Card.Title>{blog.title}</Card.Title>
-                <Card.Text className='card-text'>
-                {ReactHtmlParser( blog.content )}
-                </Card.Text>
-                </Card.Body>
-                <Card.Footer style={{ textAlign: 'left' }}>
-                    { !isliked && <FaRegHeart className='blog-detail-icon'  onClick={handleVote} />}&nbsp;
-                    { isliked && <FaHeart className='blog-detail-icon' onClick={handleUnvote} />}&nbsp;
-                    <span>{vote.length}</span>
-                    { (data.id === blog.user_id) && <MdDelete className='blog-detail-icon delete' onClick={handleDelete}/>}
-                </Card.Footer>
-            </Card><br/> */}
-
             <MDBCard>
                 <div className='rounded-top mdb-color lighten-3 text-center pt-3'>
                     <ul className='list-unstyled list-inline font-small'>

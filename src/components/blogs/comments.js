@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {InputGroup,FormControl,Button,Card} from 'react-bootstrap';
 import {createComment,deleteComment} from '../../redux/actions/comments';
+import { MDBContainer, MDBInputGroup,MDBBtn  } from "mdbreact";
 
 // import { FaHeart } from "react-icons/fa";
 // import { FaRegHeart } from "react-icons/fa";
@@ -61,7 +62,8 @@ const Comments = (props) => {
 
     return(
         <div>
-            <InputGroup>
+            <MDBContainer>
+            {/* <InputGroup>
                     <InputGroup.Prepend>
                     <InputGroup.Text>New Comment</InputGroup.Text>
                     </InputGroup.Prepend>
@@ -70,8 +72,24 @@ const Comments = (props) => {
                     aria-label="With textarea" 
                     onChange={ (e) => setComment(e.target.value)} />
                     <Button onClick={postNewComment}>Post</Button>
-            </InputGroup><br />    
+            </InputGroup><br />     */}
 
+            <MDBInputGroup
+                material
+                className="mb-0"
+                prepend="New Comment"
+                type="textarea"
+                onChange={ (e) => setComment(e.target.value)} />
+                append={
+                <MDBBtn
+                color="secondary"
+                className="m-0 px-3 py-2 z-depth-0"
+                onClick={postNewComment}
+                >
+                Post
+                </MDBBtn>
+                }
+            </MDBContainer>
             {commentList}    
         </div>
     );

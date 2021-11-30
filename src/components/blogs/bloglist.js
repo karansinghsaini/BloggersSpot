@@ -70,7 +70,7 @@ const Bloglist = (props) => {
         return(
             <div key={details._id}>
             <MDBCard>
-                <div className='rounded-top mdb-color lighten-3 text-center pt-3'>
+                <div className='rounded-top purple-gradient lighten-3 text-center pt-3'>
                     <ul className='list-unstyled list-inline font-small'>
                     <li className='list-inline-item pr-2'>
                         <MDBIcon icon="user" className='mr-1 white-text card-title-home' onClick={(e) => handleProfileClick(details.user_id,e)}>
