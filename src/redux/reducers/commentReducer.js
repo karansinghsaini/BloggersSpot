@@ -1,4 +1,5 @@
 const commentState = {
+    allcomments: [],
     comments: []
 };
 
@@ -15,6 +16,10 @@ export const commentReducer = (state = commentState, action) => {
         case 'DELETEDCOMMENT':
             alert('Comment Deleted successfully. Please refresh the page');
             return state;
+
+        case 'GETALLCOMMENT':
+            console.log('Got all the comments');
+            return Object.assign(commentState,{allcomments: action.payload.comment}); 
         
         default:
             return state;

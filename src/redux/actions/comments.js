@@ -52,3 +52,17 @@ export function deleteComment(user_id,comment_id){
         });
     };
 }
+
+
+// Get all the comments
+export function GetAllComment(){
+    return dispatch => {
+        axios.get(`/comments/get-comment`)
+        .then( (res) => {
+            dispatch({type:'GETALLCOMMENT', payload: res.data});
+        })
+        .catch(function(error){
+            console.log(error);
+        });
+    };
+}

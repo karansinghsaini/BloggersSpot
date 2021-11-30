@@ -9,13 +9,28 @@ var jwt = require('jsonwebtoken');
 const verifyToken = require('./verifyToken');
 require('dotenv').config();
 
-// Getting all the comments
+// Getting all the comments for a blog
 route.get('/:blog_id/get-comment',verifyToken, (req,res) => {
     jwt.verify(req.token, process.env.Secret, (err, authData) => {
         if(err) {
           res.sendStatus(403);
         } else {
             comments.find({blog_id:req.params.blog_id})
+            .populate('user_id', '_id username')
+            .exec(function(err,comment){
+                res.json({comment});
+            });
+        }
+    });
+});
+
+// Getting all the comments
+route.get('/get-comment',verifyToken, (req,res) => {
+    jwt.verify(req.token, process.env.Secret, (err, authData) => {
+        if(err) {
+          res.sendStatus(403);
+        } else {
+            comments.find({})
             .populate('user_id', '_id username')
             .exec(function(err,comment){
                 res.json({comment});

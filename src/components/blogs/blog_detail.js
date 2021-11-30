@@ -2,7 +2,7 @@ import React, {useEffect,useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {Redirect, useParams} from 'react-router-dom';
 import ReactHtmlParser from 'react-html-parser';
-import {Card} from 'react-bootstrap';
+import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBIcon } from 'mdbreact';
 import jwt from 'jsonwebtoken';
 // importing comments component
 import Comments from './comments';
@@ -10,10 +10,7 @@ import Comments from './comments';
 import {getBlog, DeleteBlog} from '../../redux/actions/blogs';
 import {addVote,removeVote} from '../../redux/actions/votes';
 import {getComments} from '../../redux/actions/comments';
-// heart icons
-import { FaHeart } from "react-icons/fa";
-import { FaRegHeart } from "react-icons/fa";
-import { MdDelete } from "react-icons/md";
+import {GetAllComment} from '../../redux/actions/comments';
 
 import '../../css/home.css';
 
@@ -33,7 +30,9 @@ const Detail = () => {
     const [profileNav, setProfileNav] = useState(false);
     // storing blog and author id to pass as props in Redirect component
     const [author,setAuthor] = useState();
-
+    // getting all the comments
+    var comments = useSelector( state => state.commentReducer.comments);
+    var comment = comments.filter( comment => comment.blog_id === blog._id);
 
     // initializing dispatch function
     const dispatch = useDispatch();
@@ -47,6 +46,7 @@ const Detail = () => {
     useEffect( () => {
         dispatch(getBlog(blogid));
         dispatch(getComments(blogid));
+        dispatch(GetAllComment()); 
     }, []);
 
     const handleDelete = () => {
@@ -86,7 +86,7 @@ console.log(blogid);
 
     return (
         <div className='blogs-detail'>
-            <Card className="text-center blog-card" key={blog._id} bg='info'>
+            {/* <Card className="text-center blog-card" key={blog._id} bg='info'>
                 <Card.Header className='card-title-home' onClick={(e) => handleProfileClick(blog.user_id,e)}>@{blog.author}</Card.Header>
                 <Card.Body>
                 <Card.Title>{blog.title}</Card.Title>
@@ -100,7 +100,50 @@ console.log(blogid);
                     <span>{vote.length}</span>
                     { (data.id === blog.user_id) && <MdDelete className='blog-detail-icon delete' onClick={handleDelete}/>}
                 </Card.Footer>
-            </Card><br/>
+            </Card><br/> */}
+
+            <MDBCard>
+                <div className='rounded-top mdb-color lighten-3 text-center pt-3'>
+                    <ul className='list-unstyled list-inline font-small'>
+                    <li className='list-inline-item pr-2'>
+                        <MDBIcon icon="user" className='mr-1 white-text card-title-home' onClick={(e) => handleProfileClick(blog.user_id,e)}>
+                        &nbsp; {blog.author}
+                        </MDBIcon>
+                    </li>
+                    </ul>
+                </div>
+                <MDBCardBody>
+                <MDBCardTitle className='card-title-home'>{blog.title}</MDBCardTitle>
+                <MDBCardText className='card-text'>
+                {ReactHtmlParser( blog.content )}
+                </MDBCardText>
+                </MDBCardBody>
+                <div className='rounded-bottom mdb-color lighten-3 text-center pt-3'>
+                    <ul className='list-unstyled list-inline font-small'>
+                    {/* <li className='list-inline-item pr-2 white-text'>
+                        <MDBIcon far icon='clock' /> {details.date_created}
+                    </li> */}
+                    <li className='list-inline-item pr-2'>
+                        <MDBIcon far icon='comments' className='mr-1 white-text card-title-home' >
+                        &nbsp; {comment.length}
+                        </MDBIcon>
+                    </li>
+                    { !isliked && <li className='list-inline-item pr-2'>
+                        <MDBIcon far icon="heart" className='mr-1 white-text card-title-home' onClick={handleVote}>
+                        &nbsp; {vote.length}
+                        </MDBIcon>
+                    </li>}
+                    { isliked && <li className='list-inline-item'>
+                        <MDBIcon icon="heart" className='mr-1 white-text card-title-home' onClick={handleUnvote}> 
+                        &nbsp; {vote.length}
+                        </MDBIcon>
+                    </li>}
+                    { (data.id === blog.user_id) &&  <li className='list-inline-item'>
+                        <MDBIcon icon="trash" className='mr-1 white-text card-title-home' onClick={handleDelete}/>
+                    </li>}
+                    </ul>
+                </div>
+            </MDBCard><br />
 
             <Comments data={propsData}/>
         </div>
