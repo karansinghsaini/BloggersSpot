@@ -80,7 +80,7 @@ const Comments = (props) => {
                 prepend="New Comment"
                 type="textarea"
                 onChange={ (e) => setComment(e.target.value)} />
-                {/* append={
+                append={
                 <MDBBtn
                 color="secondary"
                 className="m-0 px-3 py-2 z-depth-0"
@@ -88,7 +88,7 @@ const Comments = (props) => {
                 >
                 Post
                 </MDBBtn>
-                } */}
+                }
             </MDBContainer>
             {commentList}    
         </div>
