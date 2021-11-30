@@ -6,7 +6,7 @@ This is a Blogs website made using Reactjs, Nodejs and MongoDB.
 I have used Reactjs for frontend development. I have used the following libraries:-
 
 1. Redux -  For state management
-2. react-bootstrap - For styling the website
+2. react-bootstrap and mdbootstrap - For styling the website
 3. redux-thunk - for middleware
 4. Hooks - for stateful functions
 
