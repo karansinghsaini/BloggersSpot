@@ -69,7 +69,7 @@ const Bloglist = (props) => {
         var comment = props.comments.filter( comment => comment.blog_id === details._id);
         return(
             <div key={details._id}>
-            <MDBCard>
+            <MDBCard className='hoverable'>
                 <div className='rounded-top mdb-color lighten-3 text-center pt-3'>
                     <ul className='list-unstyled list-inline font-small'>
                     <li className='list-inline-item pr-2'>

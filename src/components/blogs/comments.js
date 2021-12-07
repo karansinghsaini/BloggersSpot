@@ -1,12 +1,9 @@
 import React, {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {InputGroup,FormControl,Button,Card} from 'react-bootstrap';
+import {Button} from 'react-bootstrap';
 import {createComment,deleteComment} from '../../redux/actions/comments';
-import { MDBContainer, MDBInputGroup,MDBBtn  } from "mdbreact";
-
-// import { FaHeart } from "react-icons/fa";
-// import { FaRegHeart } from "react-icons/fa";
-import { MdDelete } from "react-icons/md";
+import { MDBContainer, MDBInputGroup } from "mdbreact";
+import { MDBCard, MDBCardBody, MDBCardText, MDBIcon } from 'mdbreact';
 
 const Comments = (props) => {
     var commentList;
@@ -34,55 +31,81 @@ const Comments = (props) => {
 
     };
 
-
     // making the comments list as card.
     commentList = comments.map( (comment) => {
         return(
-            <Card className="text-left" bg='light'  key={comment._id}>
-                <Card.Header >
-                    @{comment.user_id.username}
-                </Card.Header>
-                <Card.Body>
-                    <blockquote className="blockquote mb-0">
-                    <p>
-                        {comment.comment}
-                    </p>
-                    </blockquote>
-                </Card.Body>
-                <Card.Footer style={{ textAlign: 'left' }}>
-                    {/* { !isliked && <FaRegHeart className='blog-detail-icon'  onClick={handleVote} />}&nbsp;
-                    { isliked && <FaHeart className='blog-detail-icon' onClick={handleUnvote} />}&nbsp;
-                    <span>{vote}</span> */}
-                    { (user_id === comment.user_id._id) && <MdDelete className='blog-detail-icon delete' onClick={ (e) => handleDelete(comment._id,e)}/>}
-                </Card.Footer>
-            </Card>
+            // <MDBCard>
+            //     <div className='rounded-top mdb-color lighten-3 text-center pt-3'>
+            //         <ul className='list-unstyled list-inline font-small'>
+            //         <li className='list-inline-item pr-2'>
+            //             <MDBIcon icon="user" className='mr-1 white-text card-title-home'>
+            //             &nbsp; {comment.user_id.username}
+            //             </MDBIcon>
+            //         </li>
+            //         </ul>
+            //     </div>
+            //     <MDBCardBody>
+            //     <MDBCardText className='card-text'>
+            //     {comment.comment}
+            //     </MDBCardText>
+            //     </MDBCardBody>
+            //     <div className='rounded-bottom mdb-color lighten-3 text-center pt-3'>
+            //         <ul className='list-unstyled list-inline font-small'>
+            //             {/* <li className='list-inline-item pr-2 white-text'>
+            //                 <MDBIcon far icon='clock' /> {comment.date_created}
+            //             </li> */}
+            //         {/* <li className='list-inline-item pr-2'>
+            //             <MDBIcon far icon='comments' className='mr-1 white-text card-title-home' onClick={(e) => handleBlogClick(comment._id,e)}>
+            //             &nbsp; {comment.length}
+            //             </MDBIcon>
+            //         </li>
+            //         { !isliked && <li className='list-inline-item pr-2'>
+            //             <MDBIcon far icon="heart" className='mr-1 white-text card-title-home' onClick={ (e) => handleVote(comment._id,e)}>
+            //             &nbsp; {vote.length}
+            //             </MDBIcon>
+            //         </li>}
+            //         { isliked && <li className='list-inline-item'>
+            //             <MDBIcon icon="heart" className='mr-1 white-text card-title-home' onClick={ (e) => handleUnvote(comment._id,e)}> 
+            //             &nbsp; {vote.length}
+            //             </MDBIcon>
+            //         </li>} */}
+            //         { (user_id === comment.user_id._id) &&  <li className='list-inline-item'>
+            //             <MDBIcon icon="trash" className='mr-1 white-text card-title-home' onClick={ (e) => handleDelete(comment._id,e)}/>
+            //         </li>}
+            //         </ul>
+            //     </div>
+            // </MDBCard>
+            <div>
+                <p>
+                    <span> <strong> {comment.user_id.username} </strong></span>&nbsp;&nbsp;
+                    <span> {comment.comment} </span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    {/* <span>
+                        { isliked &&  
+                        <MDBIcon icon="heart" className='mr-1 card-title-home' onClick={ (e) => handleUnvote(comment._id,e)} />}
+                        { !isliked && 
+                        <MDBIcon far icon="heart" className='mr-1 card-title-home' onClick={ (e) => handleVote(comment._id,e)} /> }
+                    </span> */}
+                </p>
+                <p>
+                    <span> <MDBIcon icon="ellipsis-h" /> </span>
+                </p>
+            </div>
         );
     });
-   
+
 
     return(
         <div>
             <MDBContainer>
-            {/* <InputGroup>
-                    <InputGroup.Prepend>
-                    <InputGroup.Text>New Comment</InputGroup.Text>
-                    </InputGroup.Prepend>
-                    <FormControl 
-                    as="textarea" 
-                    aria-label="With textarea" 
-                    onChange={ (e) => setComment(e.target.value)} />
-                    <Button onClick={postNewComment}>Post</Button>
-            </InputGroup><br />     */}
-
-            <MDBInputGroup
-                material
-                className="mb-0"
-                prepend="New Comment"
-                type="textarea"
-                onChange={ (e) => setComment(e.target.value)} 
-                append={
-                    <Button onClick={postNewComment}>Post</Button>
-                }
+                <MDBInputGroup
+                    material
+                    className="mb-0"
+                    prepend="New Comment"
+                    type="textarea"
+                    onChange={ (e) => setComment(e.target.value)} 
+                    append={
+                        <Button onClick={postNewComment}>Post</Button>
+                    }
                 />
             </MDBContainer>
             {commentList}    
