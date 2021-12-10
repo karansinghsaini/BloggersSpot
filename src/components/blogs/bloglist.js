@@ -1,15 +1,15 @@
-import React, {useState}  from 'react';
+import React, {useState, Fragment}  from 'react';
 import ReactHtmlParser from 'react-html-parser';
 import {useDispatch} from 'react-redux';
 import {Redirect} from 'react-router-dom';
-import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBIcon } from 'mdbreact';
-import {getBlogs} from '../../redux/actions/blogs';
+import {  MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBIcon } from 'mdbreact';
 import {addVote,removeVote} from '../../redux/actions/votes';
-import {getBlog, DeleteBlog} from '../../redux/actions/blogs';
+import {GetUserBlogs, getBlogs, DeleteBlog} from '../../redux/actions/blogs';
 import '../../css/home.css';
+import { useParams } from "react-router-dom";
 
 const Bloglist = (props) => {
-    
+    const {userid} = useParams();
     const [blogNav,setBlogNav] = useState(false);
     const [profileNav, setProfileNav] = useState(false);
     // storing blog and author id to pass as props in Redirect component
@@ -21,13 +21,23 @@ const Bloglist = (props) => {
     // adding the like to the backend
     const handleVote = (blogid,e) => {
         dispatch(addVote(props.data.id,blogid));
-        dispatch(getBlogs());
+        if(userid === undefined){
+            dispatch(getBlogs())
+        }
+        else{
+            dispatch(GetUserBlogs(userid))
+        }
     };
 
     // unvoting the blog 
     const handleUnvote = (blogid,e) => {
-        dispatch(removeVote(props.data.id,blogid));
-        dispatch(getBlogs());       
+        dispatch(removeVote(props.data.id,blogid));   
+        if(userid === undefined){
+            dispatch(getBlogs())
+        }
+        else{
+            dispatch(GetUserBlogs(userid))
+        }  
     };
 
     const handleBlogClick = (id,e) => {
@@ -68,7 +78,7 @@ const Bloglist = (props) => {
         var isliked = props.votes.some( vote => (vote.blog_id === details._id && vote.user_id === props.data.id));
         var comment = props.comments.filter( comment => comment.blog_id === details._id);
         return(
-            <div key={details._id}>
+            <Fragment key={details._id}>
             <MDBCard className='hoverable'>
                 <div className='rounded-top mdb-color lighten-3 text-center pt-3'>
                     <ul className='list-unstyled list-inline font-small'>
@@ -111,7 +121,7 @@ const Bloglist = (props) => {
                     </ul>
                 </div>
             </MDBCard><br />
-            </div>
+            </Fragment>
         )
     });
 

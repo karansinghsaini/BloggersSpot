@@ -1,6 +1,7 @@
 const myState = {
     blogs: [],
     blogDetail: {},
+    userBlogs: [],
     votes: []
 };
 
@@ -20,9 +21,11 @@ export const blogReducer =  (state = myState, action) => {
             return Object.assign(myState,{blogDetail: action.payload.blogs, votes: action.payload.votes});
 
         case 'BLOGDELETED':
-            // console.log('Blog deleted successfully:- ' + action.payload);
             window.location.href = '/home';
             return state;
+
+        case 'USERBLOGS':
+            return Object.assign(myState, {userBlogs: action.payload.blogs, votes: action.payload.votes});
 
         default:
             //returning previous state

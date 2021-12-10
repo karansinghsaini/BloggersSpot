@@ -6,15 +6,12 @@ import MyVerticallyCenteredModal from './uploadPhoto';
 import jwt from 'jsonwebtoken';
 import Bloglist from '../blogs/bloglist';
 import { Button, Image, Container,Row,Col } from 'react-bootstrap';
-import { MDBBtn } from "mdbreact";
 import '../../css/profile/profile.css';
 import defimg from '../../images/default.png';
 import {GetAllComment} from '../../redux/actions/comments';
 import {GetUserProfile} from '../../redux/actions/user';
 import {GetUserBlogs} from '../../redux/actions/blogs';
 import {FollowUser,UnFollowUser,DeleteUser} from '../../redux/actions/profile';
-
-
 
 const Profile = () => {
     // getting userid from the url params
@@ -29,7 +26,7 @@ const Profile = () => {
     // getting the full user profile for the selected user
     const user_data = useSelector( state => state.UserProfile.curr_user_data);
     // getting all the blogs for the selected user
-    const user_blogs = useSelector( state => state.blogReducer.blogs);
+    const user_blogs = useSelector( state => state.blogReducer.userBlogs);
     const votes = useSelector( state => state.blogReducer.votes);
     const dispatch = useDispatch();
     

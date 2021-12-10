@@ -25,7 +25,7 @@ const Home = () => {
     }, []);
 
     return(
-        <div>
+        <>
             <h3 className='home_head'>Welcome To Blogs</h3>
             <div className='blogs-list'>
             <Bloglist
@@ -35,7 +35,7 @@ const Home = () => {
                 data={data}
             />
             </div>
-        </div>
+        </>
     );
 }
 

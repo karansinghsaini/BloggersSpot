@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { FaDraft2Digital } from 'react-icons/fa';
 
 // connecting to redux after creating a new blog
 export function newBlog (data) {
@@ -58,11 +57,12 @@ export function getBlog(id){
     };
 }
 
+// getting all the blogs of a particular user
 export function GetUserBlogs(id){
     return dispatch => {
         axios.get(`/profile/userblogs/${id}`)
         .then( data => {
-            dispatch({type: 'BLOGS', payload: data.data});
+            dispatch({type: 'USERBLOGS', payload: data.data});
         });
     }
 }
