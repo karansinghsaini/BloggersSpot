@@ -3,7 +3,10 @@ import {useSelector, useDispatch} from 'react-redux';
 import {Button} from 'react-bootstrap';
 import {createComment,deleteComment} from '../../redux/actions/comments';
 import { MDBContainer, MDBInputGroup } from "mdbreact";
-import { MDBCard, MDBCardBody, MDBCardText, MDBIcon } from 'mdbreact';
+import { MDBIcon } from 'mdbreact';
+import {getComments} from '../../redux/actions/comments';
+import {addCommentVote, removeCommentVote} from '../../redux/actions/votes'
+import '../../css/comment.css'
 
 const Comments = (props) => {
     var commentList;
@@ -13,6 +16,18 @@ const Comments = (props) => {
     const [comment,setComment] = useState('');
     // getting comments from the redux state
     const comments = useSelector( state => state.commentReducer.comments);
+    // total number of likes the selected blog has got
+    var votes = useSelector( state => state.commentReducer.votes);
+    
+    const handleVote = (comment_id,e) => {
+        dispatch(addCommentVote(user_id,comment_id));
+        dispatch(getComments(blog_id));
+    };
+
+    const handleUnvote = (comment_id,e) => {
+        dispatch(removeCommentVote(user_id,comment_id));
+        dispatch(getComments(blog_id));
+    };
 
     // function for deleting the comment
     const handleDelete = (comment_id,e) => {
@@ -33,62 +48,25 @@ const Comments = (props) => {
 
     // making the comments list as card.
     commentList = comments.map( (comment) => {
+        var vote = votes.filter( vt => vt.comment_id ===  comment._id );
+        // checking if the current user has liked this blog or not
+        var isliked = vote.some( vt => vt.user_id === user_id );
         return(
-            // <MDBCard>
-            //     <div className='rounded-top mdb-color lighten-3 text-center pt-3'>
-            //         <ul className='list-unstyled list-inline font-small'>
-            //         <li className='list-inline-item pr-2'>
-            //             <MDBIcon icon="user" className='mr-1 white-text card-title-home'>
-            //             &nbsp; {comment.user_id.username}
-            //             </MDBIcon>
-            //         </li>
-            //         </ul>
-            //     </div>
-            //     <MDBCardBody>
-            //     <MDBCardText className='card-text'>
-            //     {comment.comment}
-            //     </MDBCardText>
-            //     </MDBCardBody>
-            //     <div className='rounded-bottom mdb-color lighten-3 text-center pt-3'>
-            //         <ul className='list-unstyled list-inline font-small'>
-            //             {/* <li className='list-inline-item pr-2 white-text'>
-            //                 <MDBIcon far icon='clock' /> {comment.date_created}
-            //             </li> */}
-            //         {/* <li className='list-inline-item pr-2'>
-            //             <MDBIcon far icon='comments' className='mr-1 white-text card-title-home' onClick={(e) => handleBlogClick(comment._id,e)}>
-            //             &nbsp; {comment.length}
-            //             </MDBIcon>
-            //         </li>
-            //         { !isliked && <li className='list-inline-item pr-2'>
-            //             <MDBIcon far icon="heart" className='mr-1 white-text card-title-home' onClick={ (e) => handleVote(comment._id,e)}>
-            //             &nbsp; {vote.length}
-            //             </MDBIcon>
-            //         </li>}
-            //         { isliked && <li className='list-inline-item'>
-            //             <MDBIcon icon="heart" className='mr-1 white-text card-title-home' onClick={ (e) => handleUnvote(comment._id,e)}> 
-            //             &nbsp; {vote.length}
-            //             </MDBIcon>
-            //         </li>} */}
-            //         { (user_id === comment.user_id._id) &&  <li className='list-inline-item'>
-            //             <MDBIcon icon="trash" className='mr-1 white-text card-title-home' onClick={ (e) => handleDelete(comment._id,e)}/>
-            //         </li>}
-            //         </ul>
-            //     </div>
-            // </MDBCard>
             <div>
                 <p>
                     <span> <strong> {comment.user_id.username} </strong></span>&nbsp;&nbsp;
                     <span> {comment.comment} </span>&nbsp;&nbsp;&nbsp;&nbsp;
-                    {/* <span>
+                    <span>{vote.length}</span>&nbsp;&nbsp;
+                    <span>
                         { isliked &&  
-                        <MDBIcon icon="heart" className='mr-1 card-title-home' onClick={ (e) => handleUnvote(comment._id,e)} />}
+                        <MDBIcon icon="heart" className='mr-1 card-title-home like' onClick={ (e) => handleUnvote(comment._id,e)} />}
                         { !isliked && 
-                        <MDBIcon far icon="heart" className='mr-1 card-title-home' onClick={ (e) => handleVote(comment._id,e)} /> }
-                    </span> */}
+                        <MDBIcon far icon="heart" className='mr-1 card-title-home like' onClick={ (e) => handleVote(comment._id,e)} /> }
+                    </span>
                 </p>
-                <p>
-                    <span> <MDBIcon icon="ellipsis-h" /> </span>
-                </p>
+                { comment.user_id._id === user_id && <p>
+                    <span> <MDBIcon icon="trash" onClick={ (e) => handleDelete(comment._id,e)}/></span>
+                </p> }
             </div>
         );
     });

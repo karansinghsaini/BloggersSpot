@@ -31,3 +31,23 @@ export function removeVote(user_id,blog_id){
         });
     };
 }
+
+// add votes for comments
+export function addCommentVote(user_id,comment_id){
+    return dispatch => {
+        axios.post(`/comments/${user_id}/commentvote/${comment_id}`)
+        .then( data => {
+            dispatch(VoteAdded())
+        });
+    };
+}
+
+// remove votes for comments
+export function removeCommentVote(user_id,comment_id){
+    return dispatch => {
+        axios.get(`/comments/${comment_id}/remove-commentvote/${user_id}`)
+        .then ( data => {
+            dispatch(GotVotes());
+        });
+    };
+}

@@ -10,7 +10,6 @@ import Comments from './comments';
 import {getBlog, DeleteBlog} from '../../redux/actions/blogs';
 import {addVote,removeVote} from '../../redux/actions/votes';
 import {getComments} from '../../redux/actions/comments';
-import {GetAllComment} from '../../redux/actions/comments';
 
 import '../../css/home.css';
 
@@ -46,7 +45,6 @@ const Detail = () => {
     useEffect( () => {
         dispatch(getBlog(blogid));
         dispatch(getComments(blogid));
-        dispatch(GetAllComment()); 
     }, []);
 
     const handleDelete = () => {
@@ -82,7 +80,6 @@ const Detail = () => {
           }} 
           />;
     }
-console.log(blogid);
 
     return (
         <div className='blogs-detail'>

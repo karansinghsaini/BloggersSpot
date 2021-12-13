@@ -6,6 +6,9 @@ var VoteSchema = new mongoose.Schema({
   },
   blog_id: {
     type: mongoose.Schema.Types.ObjectId, ref: 'blogs', require: true
+  },
+  comment_id: {
+    type: mongoose.Schema.Types.ObjectId, ref: 'comments', require: true
   }
 });
 
