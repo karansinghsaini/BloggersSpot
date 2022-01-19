@@ -115,11 +115,15 @@ const Profile = () => {
                         {  (( data.id !== user_data._id && user_data.followers !== undefined ) && user_data.followers.find(obj => obj.user_id === data.id)) && 
                                 <span> <Button variant="info" onClick = { (e) => handleUnFollow(data.id,user_data._id,data.username,user_data.username,e,)}>UnFollow</Button></span>}<br/><br/>
                         </div>
-                        <p className='follow_details'>
+                        {/* <div className='follow_details'>
+                        <p >
                         { user_data.followers !== undefined && <span><b>{user_blogs.length}</b> blogs</span> }&nbsp;&nbsp;&nbsp;&nbsp;
+                        { user_data.followers !== undefined && <span>||</span> }&nbsp;&nbsp;
                         { user_data.followers !== undefined && <span><b>{user_data.followers.length}</b> followers</span> }&nbsp;&nbsp;&nbsp;&nbsp;
+                        { user_data.followers !== undefined && <span>||</span> }&nbsp;&nbsp;
                         { user_data.following !== undefined && <span><b>{user_data.following.length}</b> following</span> }
                         </p>
+                        </div> */}
                         {(user_data.fullname !== undefined && user_data.fullname !== null) && <h6 className='fullname'>{user_data.fullname}</h6>}
                         <p>{user_data.bio}</p> 
                         {/* { (user_data.phone !== undefined && user_data.phone !== null) && <span>Contact:- {user_data.phone}</span>}&nbsp;&nbsp; 
@@ -133,6 +137,15 @@ const Profile = () => {
 
             <Row>
                 <Col >
+                <div className='follow_details'>
+                <p>
+                { user_data.followers !== undefined && <span className='follow_span'><b>{user_blogs.length}</b> blogs</span> }
+                { user_data.followers !== undefined && <span className='follow_span'>||</span> }
+                { user_data.followers !== undefined && <span className='follow_span'><b>{user_data.followers.length}</b> followers</span> }
+                { user_data.followers !== undefined && <span className='follow_span'>||</span> }
+                { user_data.following !== undefined && <span className='follow_span'><b>{user_data.following.length}</b> following</span> }
+                </p>
+                </div>
                 <h4>Blogs</h4><br />
                 { user_blogs.length === 0 && <p className='no-blogs'>No Blogs yet</p> }
                 <Bloglist

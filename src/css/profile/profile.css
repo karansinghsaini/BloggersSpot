@@ -43,6 +43,10 @@
     font-family: sans-serif;
 }
 
+.follow_span{
+    padding-right: 10px;
+}
+
 .user_delete_icon{
     padding-left: 5px;
     cursor: pointer;
@@ -68,6 +72,11 @@
         height: 171px;
         cursor: pointer;
     }
+
+    .follow_span{
+        padding-right: 60px;
+        font-size: large;
+    }
 }
 
 /* for tabs */
@@ -84,10 +93,13 @@
         
     }
     
-    
     .profile-img{
         width: 140px;
         height: 131px;
         cursor: pointer;
+    }
+
+    .follow_span{
+        padding-right: 50px;
     }
 }
