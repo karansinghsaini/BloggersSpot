@@ -104,11 +104,11 @@ const Detail = () => {
                         &nbsp; {blog.author}
                         </MDBIcon>
                     </li>
-                    <li className='list-inline-item pr-2'>
+                    { (data.id === blog.user_id) &&  <li className='list-inline-item pr-2'>
                         <MDBIcon icon="edit" className='mr-1 white-text card-title-home' onClick={(e) => handleEdit(e)}>
                         &nbsp;
                         </MDBIcon>
-                    </li>
+                    </li> }
                     </ul>
                 </div>
                 <MDBCardBody>
