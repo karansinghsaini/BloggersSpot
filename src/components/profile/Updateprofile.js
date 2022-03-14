@@ -21,6 +21,7 @@ const Profile = () => {
     const[gender, setGender] = useState(user_data.gender);
     const[phone, setPhone] = useState(user_data.phone);
     const[website, setWebsite] = useState(user_data.website);
+    const[photo, setPhoto] = useState(user_data.image);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -31,6 +32,7 @@ const Profile = () => {
         update_data.append('gender',gender);
         update_data.append('phone',phone);
         update_data.append('website',website);
+        update_data.append('image',photo);
         dispatch(UpdateProfile(data.id, update_data));
     };
 

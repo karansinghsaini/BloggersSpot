@@ -81,7 +81,6 @@ route.put('/updateprofilephoto/:id', verifyToken, parser, (req, res,next) => {
 });
 
 route.put('/updateprofile/:id', verifyToken,  parser, (req, res,next) => {
-    console.log(req.file);
     var update = {
         "fullname": req.body.fullname,
         "username": req.body.username,
@@ -89,7 +88,7 @@ route.put('/updateprofile/:id', verifyToken,  parser, (req, res,next) => {
         "gender": req.body.gender,
         "phone": req.body.phone,
         "website": req.body.website,
-        "image": req.file.path
+        "image": req.body.image
     };
 
     jwt.verify(req.token, process.env.Secret, (err, authData) => {
