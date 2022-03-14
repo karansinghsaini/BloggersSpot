@@ -29,7 +29,7 @@ const Register = () => {
               .then(function (response) {
                 console.log("Status:- " + response.status);
                 dispatch({type: 'REGISTERED_USER', payload: response});
-                //window.location.href = '/success-register';
+                window.location.href = '/success-register';
               })
               .catch(function (error) {
                 console.log(error);
