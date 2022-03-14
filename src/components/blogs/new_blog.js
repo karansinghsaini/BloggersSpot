@@ -1,8 +1,8 @@
-import React, {useState,useEffect} from 'react';
+import React, {useState,useEffect, useRef} from 'react';
 import {InputGroup, FormControl, Button} from 'react-bootstrap';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-
+import { useParams} from 'react-router-dom';
 import {getBlog} from '../../redux/actions/blogs';
 
 import {useDispatch,useSelector} from 'react-redux';
@@ -11,7 +11,7 @@ import {createBlog,UpdateBlog} from '../../redux/actions/blogs';
 import '../../css/blog.css';
 
 const Blog = (props) => {
-    var blogid;
+    const { blogid } = useParams();
     // getting the data from backend
     const blog = useSelector( state => state.blogReducer.blogDetail);
 
@@ -21,10 +21,6 @@ const Blog = (props) => {
     const dispatch = useDispatch();
 
     useEffect( () => {
-        if ( props.location.state!== undefined){
-            blogid  = props.location.state.blog_id;
-            dispatch(getBlog(blogid));
-        }
         setTitle(blog.title);
         setContent(blog.content);
     },[]);

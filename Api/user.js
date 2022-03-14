@@ -13,9 +13,13 @@ var jwt = require('jsonwebtoken');
 const verifyToken = require('./verifyToken');
 const route = express.Router();
 require('dotenv').config();
+const nodemailer = require('nodemailer');
 
 // Register Route. Saving the users data in the users model. 
 route.post('/createUser',async (req,res) => {
+
+    const email = req.body.email
+    const unqString = randString()
     // this script is for encrypting the password using a hash function
     bcrypt.genSalt(10, function(err, salt) {
         bcrypt.hash(req.body.password, salt, function(err, hash) {
@@ -23,6 +27,8 @@ route.post('/createUser',async (req,res) => {
             'username': req.body.username,
             'email': req.body.email,
             'password': hash,
+            'isValid': false,
+            'uniqueString': unqString,
             'followers': [],
             'following': []
           });
@@ -32,8 +38,8 @@ route.post('/createUser',async (req,res) => {
                     error: err.message
                 });
                 else{
-                    res.json({status: 'success'});
-                    //sendMail(user.email); 
+                    res.json(user);
+                    sendMail(email,unqString); 
                 }
             });    
         });
@@ -160,40 +166,100 @@ route.put('/updateUser/:id', verifyToken, (req, res) => {
     });
 });   
 
+// Update Password.
+route.put('/updatePassword/:id', verifyToken, (req, res) => {
+    jwt.verify(req.token, process.env.Secret, (err, authData) => {
+        if(err) {
+          res.sendStatus(403);
+        } else {
+            bcrypt.genSalt(10, function(err, salt) {
+                bcrypt.hash(req.body.newpass, salt, function(err, hash) {
+                    if(err) {
+                        res.json({
+                            error: "Failed"
+                        });
+                    } else {
+                        const update = {
+                            password: hash
+                        };
+                        users.findByIdAndUpdate({ "_id": req.params.id }, update, err => {
+                            if (err) return res.json({
+                                success: false,
+                                error: err
+                            });
+                            return res.json({
+                                success: true,
+                                authData
+                            });
+                        });
+                    }
+                });
+            });
+        }
+    });
+});
+
+const randString = () => {
+    const len = 9
+    let randStr = ''
+    for ( let i=0;i<len;i++){
+        const ch = Math.floor((Math.random() * 10) + 1)
+        randStr += ch
+    }
+    return randStr
+}
+
+const sendMail = async (email,unqString) => {
+    console.log("Sending Mail");
 
 
+    // Generate test SMTP service account from ethereal.email
+    // Only needed if you don't have a real mail account for testing
+    let testAccount = await nodemailer.createTestAccount();
+    
+    // create reusable transporter object using the default SMTP transport
+    let Transport = nodemailer.createTransport({
+        name: "smtp.ethereal.email",
+        host: "smtp.ethereal.email",
+        port: 587,
+        secure: false, // true for 465, false for other ports
+        auth: {
+        user: testAccount.user, // generated ethereal user
+        pass: testAccount.pass, // generated ethereal password
+        },
+    });
 
-// async function sendMail(id) {
-//     // Generate test SMTP service account from ethereal.email
-//     // Only needed if you don't have a real mail account for testing
-//     let testAccount = await nodemailer.createTestAccount();
+    var mailOptions;
+    let sender = "bloggerspotofficial@gmail.com"
+    mailOptions = {
+        from: sender, // sender address
+        to: email, // list of receivers
+        subject: "Register to BloggersSpot", // Subject line
+        html: `Press <a href=http://localhost:3000/verify/${unqString} > here </a> to verify your email and get registeres. Thanks and good luck with your new journey.`, // html body
+      };
 
-//     // create reusable transporter object using the default SMTP transport
-//     var transporter = nodemailer.createTransport({
-//         sesrvice: "gmail",
-//         port: 587,
-//         secure: false, // true for 465, false for other ports
-//         auth: {
-//         user: 'te.email0007@gmail.com', // generated ethereal user
-//         pass: 'Test@1234', // generated ethereal password
-//         },
-//     });
 
-//     var mailOptions = {
-//         from: 'te.email0007@gmail.com', // sender address
-//         to: id, // list of receivers
-//         subject: "Registered to BloggersSpot", // Subject line
-//         html: "<h1>Thanks for Registering with us and Welcome to BloggersSpot.</h1><p>Login to our website with your credentials to start sharing your Blogs.</p>", // html body
-//       };
+    Transport.sendMail(mailOptions, function(error, res){
+        if (error) {
+            console.log(error);
+        } else {
+            console.log('Email sent: ' + res.response);
+            res.status(200);
+        }
+    }); 
+}
 
-//     transporter.sendMail(mailOptions, function(error, info){
-//     if (error) {
-//         console.log(error);
-//     } else {
-//         console.log('Email sent: ' + info.response);
-//         console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-//     }
-//     }); 
-// }
+
+route.get('/verify:uniqueString', async (req,res) => {
+    const { uniqueString } = req.params
+    const user = await users.findOne({ uniqueString: uniqueString})
+    if (user){
+        user.isValid = true
+        await user.save()
+        res.redirect('/')
+    } else {
+        res.json('User Not Found')
+    }
+});
 
 module.exports = route;

@@ -2,7 +2,7 @@ import React, {useEffect,useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {Redirect, useParams} from 'react-router-dom';
 import ReactHtmlParser from 'react-html-parser';
-import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBIcon } from 'mdbreact';
+import { MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBIcon } from 'mdbreact';
 import jwt from 'jsonwebtoken';
 // importing comments component
 import Comments from './comments';
@@ -27,6 +27,7 @@ const Detail = () => {
     var isliked = vote.some( vt => vt.user_id === data.id);
     // for changing state and updating component only
     const [profileNav, setProfileNav] = useState(false);
+    const [blogNav, setBlogNav] = useState(false);
     // storing blog and author id to pass as props in Redirect component
     const [author,setAuthor] = useState();
     // getting all the comments
@@ -73,12 +74,24 @@ const Detail = () => {
         setProfileNav(true);
     };
 
+    const handleEdit = (e) => {
+        setBlogNav(true);
+    }
+
     // if user clicked on username then redirecting to user-profile
     if(profileNav){
         return < Redirect to ={ {
             pathname: `/profile/${author}`
           }} 
           />;
+    }
+
+    // If user clicked on Blogs then redirecting to blogs-detail
+    if(blogNav){
+        return < Redirect to ={ {
+            pathname: `/edit-blog/${blogid}`
+            }} 
+            />;
     }
 
     return (
@@ -89,6 +102,11 @@ const Detail = () => {
                     <li className='list-inline-item pr-2'>
                         <MDBIcon icon="user" className='mr-1 white-text card-title-home' onClick={(e) => handleProfileClick(blog.user_id,e)}>
                         &nbsp; {blog.author}
+                        </MDBIcon>
+                    </li>
+                    <li className='list-inline-item pr-2'>
+                        <MDBIcon icon="edit" className='mr-1 white-text card-title-home' onClick={(e) => handleEdit(e)}>
+                        &nbsp;
                         </MDBIcon>
                     </li>
                     </ul>

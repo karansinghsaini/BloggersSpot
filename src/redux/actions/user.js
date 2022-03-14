@@ -31,3 +31,13 @@ export function GetAllUsers () {
         });
     };
 }
+
+export function ChangePassword (id,data) {
+    return dispatch => {
+        axios.put(`/user/updatePassword/${id}`, data)
+        .then ( res => {
+            dispatch({type: 'CHANGEPASS', payload: res});
+            alert("Password has been changed successfully");
+        })
+    }
+}

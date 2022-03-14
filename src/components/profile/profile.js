@@ -13,6 +13,7 @@ import {GetUserProfile} from '../../redux/actions/user';
 import {GetUserBlogs} from '../../redux/actions/blogs';
 import {FollowUser,UnFollowUser,DeleteUser} from '../../redux/actions/profile';
 
+
 const Profile = () => {
     // getting userid from the url params
     const { userid } = useParams();
@@ -21,6 +22,7 @@ const Profile = () => {
     const data = jwt.decode(localStorage.jwtToken);
     // for update-profile
     const [navigate,setNavigate] = useState(false);
+    const [navpass,setNavpass] = useState(false);
     // getting all the comments
     var comments = useSelector( state => state.commentReducer.allcomments);
     // getting the full user profile for the selected user
@@ -107,23 +109,15 @@ const Profile = () => {
                         <div className='profile_bio'>
                         { (user_data.username !== undefined && user_data.username !== null) && <span className = 'username'> {user_data.username}</span>}&nbsp;&nbsp;
 
-                        { (data.id === user_data._id) && <Button variant="secondary" size="sm" onClick={handleUpdate} >Edit</Button>}
+                        { (data.id === user_data._id) && <Button variant="info" size="sm" onClick={handleUpdate} >Edit</Button>}
                         { (data.id === user_data._id) && <Button variant="danger" size="sm" onClick={deleteUser} >Delete</Button>}
 
                         {  (( data.id !== user_data._id && user_data.followers !== undefined ) && !user_data.followers.find(obj => obj.user_id === data.id)) && 
                                 <span><Button variant="info" onClick = { (e) => handleFollow(data.id,user_data._id,data.username,user_data.username,e,)}>Follow</Button></span>}
                         {  (( data.id !== user_data._id && user_data.followers !== undefined ) && user_data.followers.find(obj => obj.user_id === data.id)) && 
                                 <span> <Button variant="info" onClick = { (e) => handleUnFollow(data.id,user_data._id,data.username,user_data.username,e,)}>UnFollow</Button></span>}<br/><br/>
+
                         </div>
-                        {/* <div className='follow_details'>
-                        <p >
-                        { user_data.followers !== undefined && <span><b>{user_blogs.length}</b> blogs</span> }&nbsp;&nbsp;&nbsp;&nbsp;
-                        { user_data.followers !== undefined && <span>||</span> }&nbsp;&nbsp;
-                        { user_data.followers !== undefined && <span><b>{user_data.followers.length}</b> followers</span> }&nbsp;&nbsp;&nbsp;&nbsp;
-                        { user_data.followers !== undefined && <span>||</span> }&nbsp;&nbsp;
-                        { user_data.following !== undefined && <span><b>{user_data.following.length}</b> following</span> }
-                        </p>
-                        </div> */}
                         {(user_data.fullname !== undefined && user_data.fullname !== null) && <h6 className='fullname'>{user_data.fullname}</h6>}
                         <p>{user_data.bio}</p> 
                         {/* { (user_data.phone !== undefined && user_data.phone !== null) && <span>Contact:- {user_data.phone}</span>}&nbsp;&nbsp; 

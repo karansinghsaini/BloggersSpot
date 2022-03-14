@@ -19,6 +19,11 @@ export const userReducer =  (state = myState, action) => {
         case 'GOTALLUSERS':
             return Object.assign(myState,{users: action.payload.data});
 
+        case 'CHANGEPASS':
+            localStorage.clear('jwtToken');
+            window.location.href = '/login';
+            return state;
+
         default:
             return state;
     }   

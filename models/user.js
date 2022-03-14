@@ -36,6 +36,12 @@ const userSchema = new mongoose.Schema({
     image: {
         type: String
     },
+    isValid: {
+        type: Boolean
+    },
+    uniqueString: {
+        type: String
+    },
     followers: [
         {
             user_id: String,

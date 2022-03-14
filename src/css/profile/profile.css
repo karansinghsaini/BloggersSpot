@@ -52,6 +52,10 @@
     cursor: pointer;
 }
 
+.setting_icon{
+    color: black;
+}
+
 /* for desktop */
 @media only screen and (min-width: 800px){
     .profile-left-div{
