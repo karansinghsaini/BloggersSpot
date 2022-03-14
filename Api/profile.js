@@ -87,8 +87,7 @@ route.put('/updateprofile/:id', verifyToken,  parser, (req, res,next) => {
         "bio": req.body.bio,
         "gender": req.body.gender,
         "phone": req.body.phone,
-        "website": req.body.website,
-        "image": req.body.image
+        "website": req.body.website
     };
 
     jwt.verify(req.token, process.env.Secret, (err, authData) => {
