@@ -105,7 +105,7 @@ route.get('/getUser/:id', (req,res) => {
 
 route.delete('/deleteUser/:id', verifyToken, function (req, res) {
     
-
+    console.log(req.params.id)
     jwt.verify(req.token, process.env.Secret, (err, authData) => {
         if(err) {
           res.sendStatus(403);

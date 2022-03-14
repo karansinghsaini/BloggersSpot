@@ -30,6 +30,8 @@ export const UserProfile = (state = myState, action) => {
 
         case "DELETEUSER":
             alert("User deleted successfully");
+            localStorage.clear('jwtToken');
+            window.location.href = '/register';
             return state;
 
         default:

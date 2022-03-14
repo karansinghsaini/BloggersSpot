@@ -67,7 +67,7 @@ const Authors = () => {
             return(
                 <div className="author-card">
                     <Image className='overlay_image' src={author_card_img} />
-                    { user.image === undefined && 
+                    { (user.image === undefined | user.image === null) && 
                         <Image className='author-img' src={defimg} roundedCircle 
                         onClick={(e) =>handleProfileClick(user._id)}
                     />  }

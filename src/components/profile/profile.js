@@ -53,8 +53,6 @@ const Profile = () => {
     const deleteUser = () => {
         if(window.confirm('Are you sure you want to delete your account?')){
             dispatch(DeleteUser(userid));
-            localStorage.clear('jwtToken');
-            window.location.href = '/register';
         }
     }
 
@@ -93,7 +91,7 @@ const Profile = () => {
                              
                     {/* User Profile picture */}
                     <Col>
-                        { user_data.image === undefined && 
+                        { (user_data.image === undefined && user_data.image === null) &&
                             <Image className='profile-img' src={defimg} roundedCircle 
                             onClick={(e) => handleUploadPhoto(e)}
                         />  }   <br/><br/>
