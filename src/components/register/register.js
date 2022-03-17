@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
-import {Form, Button} from 'react-bootstrap';
 import axios from 'axios';
 import {useDispatch} from 'react-redux';
-
+import { MDBContainer, MDBRow, MDBCol, MDBInput } from "mdbreact";
 import '../../css/userAuth/register.css';
 
 const Register = () => {
@@ -24,7 +23,6 @@ const Register = () => {
                 "email": email,
                 "password": pass1
             }
-
             axios.post('/user/createUser', data)
               .then(function (response) {
                 console.log("Status:- " + response.status);
@@ -37,71 +35,88 @@ const Register = () => {
     }
 }
 
-    return(
-        <div className='register-div-style'>
-            <h3 className='register-head'>Register Today To Start Your Journey</h3>
+        return(
             <div className='register-box'>
+            <div className='peach-gradient register_head_div'>
+                <h3 className='register-head'>Register</h3>
+            </div>
             <div className='register-container'>
-                <Form onSubmit={handleSubmit} >
-                    <Form.Group controlId="formBasicUsername">
-                        <Form.Label className='register-form-text'>Username</Form.Label>
-                        <Form.Control type="text" value={username} placeholder="Enter Username" onChange = { (e) => setUsername(e.target.value)} required={true}/>
-                    </Form.Group>
-                    {/* Email Goes Here */}
-                    <Form.Group controlId="formBasicEmail">
-                        <Form.Label className='register-form-text'>Email address</Form.Label>
-                        <Form.Control type="email" value={email} placeholder="Enter email" onChange = { (e) => setEmail(e.target.value)} required={true}/>
-                        <Form.Text className=" register-form-text" >
-                        We'll never share your email with anyone else.
-                        </Form.Text>
-                    </Form.Group>
-
-                    {/* Password Fields */}
-                    <Form.Group controlId="formBasicPassword1">
-                        <Form.Label className='register-form-text'>Password</Form.Label>
-                        <Form.Control 
-                        type="password" placeholder="Password" 
-                        aria-describedby="passwordHelpInline"
-                        onChange = { (e) => setPass1(e.target.value)} 
-                        required={true}/>
-                    </Form.Group>
-                    <Form.Group controlId="formBasicPassword2">
-                        <Form.Label className='register-form-text'>Confirm Password</Form.Label>
-                        <Form.Control 
-                        type="password" placeholder="Password" 
-                        onChange = { (e) => setPass2(e.target.value)} 
-                        required={true}/>
-                        <Form.Text id="passwordHelpBlock" className='register-form-text'>
-                            Your password must be 8-20 characters long.
-                        </Form.Text>
-                        <Form.Text id="passwordHelpBlock" muted className='register-form-text'>
-                            Must contain letters, numbers and special characters only.
-                        </Form.Text>
-                    </Form.Group>
-                    <Form.Group>
-                        <Form.Check
-                        className='register-form-text'
-                        required = {true}
-                        label="Agree to terms and conditions"
-                        feedback="You must agree before submitting."
-                        />
-                    </Form.Group>
-                    
-                    <Button variant="primary" type="submit" className='register-form-text register-button'>
-                        Register
-                    </Button><br /><br />
-
-                    <Form.Group>
-                        <Form.Text className='register-form-text'>
-                            If already a user then click below to sign in
-                        </Form.Text>
-                        <a href='/login' className='register-button'>SignIn</a>
-                    </Form.Group>
-                </Form>
+            <MDBContainer className='register_form'>
+            <MDBRow>
+            <MDBCol md="10">
+                <form onSubmit={handleSubmit}>
+                <div className="grey-text">
+                    <MDBInput
+                    label="Your Username"
+                    icon="user"
+                    group
+                    type="text"
+                    validate
+                    error="wrong"
+                    success="right"
+                    value={username} 
+                    onChange = { (e) => setUsername(e.target.value)} 
+                    required={true}
+                    />
+                    <MDBInput
+                    label="Your email"
+                    icon="envelope"
+                    group
+                    type="email"
+                    validate
+                    error="wrong"
+                    success="right"
+                    value={email} 
+                    onChange = { (e) => setEmail(e.target.value)} 
+                    required={true}
+                    />
+                    <MDBInput
+                    label="Your password"
+                    icon="lock"
+                    group
+                    type="password"
+                    validate
+                    onChange = { (e) => setPass1(e.target.value)} 
+                    required={true}
+                    />
+                    <MDBInput
+                    label="Confirm Your password"
+                    icon="lock"
+                    group
+                    type="password"
+                    validate
+                    onChange = { (e) => setPass2(e.target.value)} 
+                    required={true}
+                    />
+                </div>
+                <div className="custom-control custom-checkbox pl-3">
+                    <input
+                        className="custom-control-input"
+                        type="checkbox"
+                        value=""
+                        id="invalidCheck"
+                        required
+                    />
+                    <label className="custom-control-label" htmlFor="invalidCheck">
+                        Agree to terms and conditions
+                    </label>
+                    <div className="invalid-feedback">
+                        You must agree before submitting.
+                    </div>
+                </div><br/>
+                <div className="text-center">
+                    <span>
+                    <button className='submit_button' type="submit">Register</button>
+                    <p> Have an account? <a href='/login' >SignIn</a></p>
+                    </span>
+                </div>
+                </form><br/>
+            </MDBCol>
+            </MDBRow>
+            </MDBContainer>
             </div>
             </div>
-        </div>
-    );
+        );
 
 }
 

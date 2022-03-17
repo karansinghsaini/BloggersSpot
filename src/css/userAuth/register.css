@@ -1,17 +1,16 @@
 .register-head{
-    padding-top: 20px;
+    padding-top: 30px;
     font-family: 'sans-serif';
     font-weight: lighter;
     font-variant: small-caps;
     color: white;
 }
 
-.register-div-style{
-    background-image: url('../../images/register.jpg');
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: 100% 100%;
+.register_form{
+    text-align: left;
+    padding-left: 10%;
 }
+
 
 .register-form-text{
     color: white;
@@ -37,32 +36,58 @@
 }
 /* for mobile */
 .register-container{
-    width: 70%; 
+    width: 100%; 
     margin: 30px auto;
     text-align: left;
+    position: relative;
 }
 
 .register-box{
-    border-style: groove;
+    position: relative;
     width: 80%;
-    margin: 10px auto;
+    margin: 50px auto;
     box-shadow: 10px 15px 8px 0 rgba(0, 0, 0, 0.2), 0 15px 20px 0 rgba(0, 0, 0, 0.19);
     box-sizing: border-box; 
-    background-color: rgba(99, 99, 99, 0.8); 
-    border-radius: 20px;
+    border-radius: 20px ;
 }
+
+.register_head_div{
+    border-radius: 20px 20px 0px 0px;
+    height: 100px;
+}
+
+.submit_button{
+    font-size: 12px;
+    background-color: #f4511e;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    margin: 4px 2px;
+    opacity: 0.6;
+    transition: 0.3s;
+    display: inline-block;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.submit_button:hover {opacity: 1}
 
 /* for desktop */
 @media only screen and (min-width: 800px){
     .register-container{
-        width: fit-content; 
-        margin: 30px auto;
+        margin: 30px ;
+    }
+
+    .register_form{
+        text-align: left;
+        padding-left: auto;
     }
     
     .register-box{
-        border-style: groove;
-        width: 50%;
-        margin: 10px auto;
+        width: 40%;
+        margin: 50px auto;
         box-shadow: 10px 15px 8px 0 rgba(0, 0, 0, 0.2), 0 15px 20px 0 rgba(0, 0, 0, 0.19);
         box-sizing: border-box;  
     }
@@ -73,13 +98,18 @@
 @media only screen and (min-width: 600px) and (max-width: 800px){
     .register-container{
         width: 70%; 
-        margin: 30px auto;
+        margin: 30px;
+    }
+
+    .register_form{
+        text-align: left;
+        padding-left: 20%;
     }
     
     .register-box{
-        border-style: groove;
+        /* border-style: groove; */
         width: 70%;
-        margin: 10px auto;
+        margin: 50px auto;
         box-shadow: 10px 15px 8px 0 rgba(0, 0, 0, 0.2), 0 15px 20px 0 rgba(0, 0, 0, 0.19);
         box-sizing: border-box;  
     }

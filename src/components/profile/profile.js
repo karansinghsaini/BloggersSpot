@@ -12,7 +12,8 @@ import {GetAllComment} from '../../redux/actions/comments';
 import {GetUserProfile} from '../../redux/actions/user';
 import {GetUserBlogs} from '../../redux/actions/blogs';
 import {FollowUser,UnFollowUser,DeleteUser} from '../../redux/actions/profile';
-
+import { FiSettings, FiEdit } from "react-icons/fi";
+import Settings from './../Settings/index';
 
 const Profile = () => {
     // getting userid from the url params
@@ -22,7 +23,6 @@ const Profile = () => {
     const data = jwt.decode(localStorage.jwtToken);
     // for update-profile
     const [navigate,setNavigate] = useState(false);
-    const [navpass,setNavpass] = useState(false);
     // getting all the comments
     var comments = useSelector( state => state.commentReducer.allcomments);
     // getting the full user profile for the selected user
@@ -31,6 +31,8 @@ const Profile = () => {
     const user_blogs = useSelector( state => state.blogReducer.userBlogs);
     const votes = useSelector( state => state.blogReducer.votes);
     const dispatch = useDispatch();
+    const [settingModal, setSettingModal] = useState(false);
+
     
     useEffect( () => {
         dispatch(GetUserProfile(userid));
@@ -44,16 +46,16 @@ const Profile = () => {
         }
     }
 
+    const handleSettings = (e,id) =>{
+        if(data.id === user_data._id){
+            setSettingModal(true);
+        }
+    }
+
     // for user-profile page
     const handleUpdate = () => {
         dispatch(GetUserProfile(userid));
         setNavigate(true);
-    }
-
-    const deleteUser = () => {
-        if(window.confirm('Are you sure you want to delete your account?')){
-            dispatch(DeleteUser(userid));
-        }
     }
 
     // for follow
@@ -88,7 +90,6 @@ const Profile = () => {
     return(
         <Container>
             <Row>
-                             
                     {/* User Profile picture */}
                     <Col>
                         { (user_data.image === undefined && user_data.image === null) &&
@@ -105,10 +106,10 @@ const Profile = () => {
                         {/* username */}
                         <div className='profile_details'>
                         <div className='profile_bio'>
-                        { (user_data.username !== undefined && user_data.username !== null) && <span className = 'username'> {user_data.username}</span>}&nbsp;&nbsp;
+                        { (user_data.username !== undefined && user_data.username !== null) && <span className = 'username'> {user_data.username}</span>}&nbsp;&nbsp;&nbsp;&nbsp;
 
-                        { (data.id === user_data._id) && <Button variant="info" size="sm" onClick={handleUpdate} >Edit</Button>}
-                        { (data.id === user_data._id) && <Button variant="danger" size="sm" onClick={deleteUser} >Delete</Button>}
+                        { (data.id === user_data._id) && <FiEdit className='profile_edit' onClick={handleUpdate}></FiEdit>}&nbsp;&nbsp;&nbsp;&nbsp;
+                        { (data.id === user_data._id) && <FiSettings className='profile_settings' onClick={handleSettings} ></FiSettings>}
 
                         {  (( data.id !== user_data._id && user_data.followers !== undefined ) && !user_data.followers.find(obj => obj.user_id === data.id)) && 
                                 <span><Button variant="info" onClick = { (e) => handleFollow(data.id,user_data._id,data.username,user_data.username,e,)}>Follow</Button></span>}
@@ -152,6 +153,12 @@ const Profile = () => {
             <MyVerticallyCenteredModal 
                 show={modalShow}
                 onHide={() => setModalShow(false)}
+                user_data={user_data}
+            />
+
+            <Settings 
+                show={settingModal}
+                onHide={() => setSettingModal(false)}
                 user_data={user_data}
             />
             

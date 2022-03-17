@@ -22,7 +22,7 @@
 }
 
 .profile_details{
-    padding-right: auto;
+    text-align: left;
 }
 
 .profile_bio{
@@ -54,6 +54,14 @@
 
 .setting_icon{
     color: black;
+}
+
+.profile_settings{
+    cursor: pointer;
+}
+
+.profile_edit{
+    cursor: pointer;
 }
 
 /* for desktop */

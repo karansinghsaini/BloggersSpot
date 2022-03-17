@@ -1,11 +1,3 @@
-.login-div-style{
-    height: 610px;
-    background-image: url('../../images/register.jpg');
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: 100% 100%;
-}
-
 .login-head{
     padding-top: 40px;
     font-family: sans-serif;
@@ -14,10 +6,9 @@
     color: white;
 }
 
-.login-form-text{
-    color: white;
+.login_form{
     text-align: left;
-    /* font-weight: 500; */
+    padding-left: 10%;
 }
 
 /* for mobile */
@@ -27,49 +18,72 @@
     text-align: left;
 }
 
-.login-button{
-    margin-left: 35%;
-}
-
 .login-box{
-    border-style: groove;
+    position: relative;
     width: 80%;
-    margin: 60px auto;
+    margin: 50px auto;
     box-shadow: 10px 15px 8px 0 rgba(0, 0, 0, 0.2), 0 15px 20px 0 rgba(0, 0, 0, 0.19);
-    box-sizing: border-box;  
-    background-color: rgba(99, 99, 99, 0.8); 
-    border-radius: 20px;
+    box-sizing: border-box; 
+    border-radius: 20px ;
 }
 
+.login_head_div{
+    border-radius: 20px 20px 0px 0px;
+    height: 100px;
+}
+
+.submit_button{
+    font-size: 12px;
+    background-color: #f4511e;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    margin: 4px 2px;
+    opacity: 0.6;
+    transition: 0.3s;
+    display: inline-block;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.submit_button:hover {opacity: 1}
 
 /* for desktop */
 @media only screen and (min-width: 800px){
     .login-container{
-        width: fit-content; 
-        margin: 20px auto;
+        margin: 30px;
     }
     
     .login-box{
-        border-style: groove;
         width: 40%;
-        margin: 60px auto;
+        margin: 50px auto;
         box-shadow: 10px 15px 8px 0 rgba(0, 0, 0, 0.2), 0 15px 20px 0 rgba(0, 0, 0, 0.19);
-        box-sizing: border-box;  
+        box-sizing: border-box;   
+    }
+
+    .login_form{
+        text-align: left;
+        padding-left: auto;
     }
 }
 
 /* for tabs */
 @media only screen and (min-width: 600px) and (max-width: 800px){
     .login-container{
-        width: 70%; 
-        margin: 20px auto;
+        margin: 30px;
     }
     
     .login-box{
-        border-style: groove;
-        width: 70%;
-        margin: 60px auto;
+        width: 40%;
+        margin: 50px auto;
         box-shadow: 10px 15px 8px 0 rgba(0, 0, 0, 0.2), 0 15px 20px 0 rgba(0, 0, 0, 0.19);
         box-sizing: border-box;  
+    }
+
+    .login_form{
+        text-align: left;
+        padding-left: auto;
     }
 }

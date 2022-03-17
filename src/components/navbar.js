@@ -113,12 +113,6 @@ const Menu = () => {
               </Nav.Link> 
             </MDBNavItem> }
 
-            { isLoggedIn && <MDBNavItem>
-              <Nav.Link className="waves-effect waves-light" href="/settings">
-                <MDBIcon icon="cog" />
-              </Nav.Link> 
-            </MDBNavItem> }
-
             { isLoggedIn &&  <MDBNavItem>            
             <Nav.Link className="waves-effect waves-light" href={`/profile/${data.id}`} >
                 <MDBIcon icon="user" />
