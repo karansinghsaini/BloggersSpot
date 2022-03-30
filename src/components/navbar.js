@@ -78,7 +78,7 @@ const Menu = () => {
 
   return (
    
-      <MDBNavbar color="stylish-color-dark" dark expand="md">
+      <MDBNavbar color="special-color" dark expand="md">
         <MDBNavbarBrand >
           <strong className="white-text">Bloggers</strong>
         </MDBNavbarBrand>
